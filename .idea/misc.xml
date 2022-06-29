@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_adding_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_barcode_scanner.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_menu_detail.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_menu_editable.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_menu_list.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/layout_category.xml" value="0.264" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/layout_info_dialog_box.xml" value="0.25" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/layout_menu.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/Hp/Documents/GitHub/ChaChingApp/app/src/main/res/layout/layout_menu_editable.xml" value="0.24895833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

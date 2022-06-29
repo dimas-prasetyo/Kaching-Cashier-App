@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/background_rounded"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        app:cardCornerRadius="40dp"
+        android:layout_alignTop="@id/center"
+        android:layout_marginTop="-150dp"
+        android:translationZ="-90dp"
+        android:backgroundTint="@color/colorWhiteDark"/>
+
+    <LinearLayout
+        android:id="@+id/layout_menu_1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_alignTop="@id/background_rounded"
+        android:translationZ="90dp"
+        android:layout_marginLeft="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_1"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Jual"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_2"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Daftar Menu"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_3"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Riwayat"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_menu_2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_menu_1"
+        android:translationZ="90dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_4"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Kasir"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_5"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Pengaturan"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_menu_6"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                app:tint="@color/primary_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="70dp"
+                android:textSize="18sp"
+                style="@style/textPrimary"
+                android:textStyle="bold"
+                android:text="Tentang"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

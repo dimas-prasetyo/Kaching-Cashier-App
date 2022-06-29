@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="20dp"
+        app:strokeWidth="4dp"
+        app:strokeColor="@color/primary_dark">
+
+        <TextView
+            android:id="@+id/txt_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum"
+            android:padding="15dp"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

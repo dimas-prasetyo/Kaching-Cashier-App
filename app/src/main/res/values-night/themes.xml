@@ -1,0 +1,78 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ChaChingApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/primary_light</item>
+        <item name="android:textColor">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="textPrimary" parent="@android:style/Theme.Black">
+        <item name="android:textColor">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="textSecondary" parent="@android:style/Theme.Black">
+        <item name="android:textColor">@color/secondaryTextWhite</item>
+    </style>
+
+    <style name="main_background" parent="@android:style/Theme.Black">
+        <item name="android:background">@color/primaryTextBlack</item>
+    </style>
+
+    <style name="main_background_tint" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">@color/primaryTextBlack</item>
+    </style>
+
+    <style name="secondary_background" parent="@android:style/Theme.Black">
+        <item name="android:background">#232323</item>
+    </style>
+
+    <style name="genre_box" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">@color/primary_dark</item>
+        <item name="android:textColor">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="button_next_on_boarding" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">@color/primary_light</item>
+        <item name="android:textColor">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="button_back_on_boarding" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">#424242</item>
+        <item name="android:textColor">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="cardview_input" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">#424242</item>
+    </style>
+
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="@android:style/Theme.Black">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0sp</item>
+    </style>
+
+    <style name="btn_more" parent="@android:style/Theme.Black">
+        <item name="tint">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="btn_back" parent="Widget.AppCompat.Toolbar">
+        <item name="tint">@color/primaryTextWhite</item>
+    </style>
+
+    <style name="card_view_box" parent="@android:style/Theme.Black">
+        <item name="android:backgroundTint">@color/primary_dark</item>
+    </style>
+
+</resources>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddingMenuActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/main_background"/>
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/input_category"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_category"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="-3dp"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="Input Category"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_name"
+                style="@style/textPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/input_category"
+                android:layout_alignRight="@id/input_category"
+                android:layout_below="@id/txt_name"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="Input Name"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_price"
+                style="@style/textPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/input_category"
+                android:layout_below="@id/txt_price"
+                android:layout_toRightOf="@id/txt_currency"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="0"
+                android:inputType="number"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_proportion"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/input_category"
+                android:layout_below="@id/txt_proportion"
+                android:layout_toLeftOf="@id/cv_info_proportion"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="0"
+                android:inputType="number"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_unit"
+                style="@style/textPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/input_category"
+                android:layout_alignRight="@id/txt_unit"
+                android:layout_below="@id/txt_unit"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="Input Name"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_amount"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_amount"
+                android:layout_alignRight="@id/txt_amount"
+                android:layout_below="@id/txt_amount"
+                android:backgroundTint="@color/primary_dark"
+                android:inputType="number"
+                android:text="1"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/input_barcode"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/txt_barcode"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/cv_button_scan_barcode"
+                android:backgroundTint="@color/primary_dark"
+                android:hint="Input Barcode"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/cv_product_photo"
+                android:layout_alignRight="@id/input_category"
+                android:layout_alignTop="@id/cv_product_photo"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/cv_product_photo"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_button_1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/primary_light"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:strokeColor="@color/primary_dark"
+                    app:strokeWidth="1dp">
+
+                    <ImageView
+                        android:id="@+id/button_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_add"
+                        app:tint="@color/primary_dark" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_button_2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:backgroundTint="@color/primary_dark"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp">
+
+                    <ImageView
+                        android:id="@+id/button_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_delete"
+                        app:tint="@color/primary_light" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/txt_category"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Category *" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/input_category"
+                android:layout_marginTop="10dp"
+                android:text="Name *" />
+
+            <TextView
+                android:id="@+id/txt_price"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/input_name"
+                android:layout_marginTop="10dp"
+                android:text="Price *" />
+
+            <TextView
+                android:id="@+id/txt_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/input_price"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_alignTop="@id/input_price"
+                android:gravity="center_vertical"
+                android:text="Rp."
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_proportion"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/input_price"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Proportion" />
+
+            <TextView
+                android:id="@+id/txt_unit"
+                style="@style/textSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_alignRight="@id/center_horizontal"
+                android:layout_below="@id/input_proportion"
+                android:layout_marginTop="10dp"
+                android:text="Unit" />
+
+            <TextView
+                android:id="@+id/txt_amount"
+                style="@style/textSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/input_category"
+                android:layout_below="@id/input_proportion"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/cv_info_unit"
+                android:text="Amount" />
+
+            <TextView
+                android:id="@+id/txt_photo"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/input_unit"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Photo" />
+
+            <TextView
+                android:id="@+id/txt_barcode"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/cv_product_photo"
+                android:layout_marginTop="10dp"
+                android:text="Barcode" />
+
+            <TextView
+                android:id="@+id/txt_required"
+                style="@style/textSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/cv_button_scan_barcode"
+                android:layout_marginTop="10dp"
+                android:text="* required"
+                android:textSize="13sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/empty_space"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_below="@id/txt_required" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_info_proportion"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignRight="@id/input_category"
+                android:layout_below="@id/txt_proportion"
+                android:layout_marginLeft="15dp"
+                android:backgroundTint="@android:color/transparent"
+                android:elevation="10dp"
+                app:cardCornerRadius="30dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/button_info_proportion"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_info_outline"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    app:tint="@color/colorGold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_info_unit"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/txt_unit"
+                android:layout_toRightOf="@id/txt_unit"
+                android:backgroundTint="@android:color/transparent"
+                app:cardCornerRadius="30dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/button_info_unit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_info_outline"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    app:tint="@color/colorGold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_product_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignLeft="@id/txt_category"
+                android:layout_below="@id/txt_photo"
+                android:layout_marginTop="5dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="@color/primary_dark"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:id="@+id/product_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorGray" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_button_scan_barcode"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/input_barcode"
+                android:layout_alignRight="@id/input_category"
+                android:layout_alignTop="@id/input_barcode"
+                android:backgroundTint="@color/primary_dark"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/button_scan_barcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:src="@drawable/icon_scan"
+                    app:tint="@color/primary_light" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/primary_dark"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Done"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
