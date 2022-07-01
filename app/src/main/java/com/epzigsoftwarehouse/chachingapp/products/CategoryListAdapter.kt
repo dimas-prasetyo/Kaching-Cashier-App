@@ -12,6 +12,7 @@ import com.epzigsoftwarehouse.chachingapp.R
 import kotlinx.android.synthetic.main.layout_category.view.*
 
 class CategoryListAdapter (val context: Context?, val items: List<String>, val activeTab: String) : RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
+    var onItemClick: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryListAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_category, parent, false))
@@ -20,13 +21,17 @@ class CategoryListAdapter (val context: Context?, val items: List<String>, val a
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: CategoryListAdapter.ViewHolder, position: Int) {
         val item = items.get(position)
+
+        holder.text_category.text = item
         if (item.equals(activeTab)){
             //holder.cv_kategory.backgroundTintList = ColorStateList.valueOf(R.color.primary_dark)
             holder.bg_category.setBackgroundColor(ContextCompat.getColor(context!!, R.color.primary_dark))
-
+            holder.text_category.setTextColor(ContextCompat.getColor(context, R.color.white))
+        }
+        holder.text_category.setOnClickListener {
+            onItemClick?.invoke(items[position])
         }
 
-        holder.text_category.text = item
     }
 
     override fun getItemCount(): Int {

@@ -3,6 +3,7 @@ package com.epzigsoftwarehouse.chachingapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
@@ -11,8 +12,12 @@ import com.epzigsoftwarehouse.chachingapp.products.Product
 import com.epzigsoftwarehouse.chachingapp.products.ProductListAdapter
 import kotlinx.android.synthetic.main.activity_menu_list.*
 
-class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
+class MenuListActivity : AppCompatActivity(){
     private lateinit var productList: ArrayList<Product>
+    private var filteredProductList: ArrayList<Product> = ArrayList()
+    private lateinit var selectedProduct: List<Int>
+    private var tempSelectedProduct: ArrayList<Int> = ArrayList()
+    private var categoryActive = "All"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +25,32 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
         setContentView(R.layout.activity_menu_list)
 
         loadProductList()
+
+        input_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                /*if (p0.equals("") || p0 == null){
+                } else {
+                    loadProductBy(categoryActive, p0)
+                }*/
+
+                if (p0 != null) {
+                    loadProductBy(categoryActive, p0)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                /*if (p0.equals("") || p0 == null){
+                } else {
+                    loadProductBy(categoryActive, p0)
+                }*/
+                if (p0 != null) {
+                    loadProductBy(categoryActive, p0)
+                }
+                return false
+            }
+
+        })
     }
 
     private fun loadProductList() {
@@ -27,7 +58,6 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
             productList = getProductList()
             loadCategory()
             loadProduct()
-
         } else {
         }
     }
@@ -38,6 +68,7 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
 
 
         var tempList: ArrayList<String> = ArrayList()
+        tempList.add(categoryActive)
         tempList.add("All")
 
         for (i in 0..productList.size - 1){
@@ -46,8 +77,103 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
         }
         var categoryList = tempList.distinct()
 
-        val categoryItemAdapter = CategoryListAdapter(this, categoryList, "All")
+        val categoryItemAdapter = CategoryListAdapter(this, categoryList, categoryActive)
         rv_kategori_list.adapter = categoryItemAdapter
+
+        categoryItemAdapter.onItemClick = { category ->
+            categoryActive = category
+            /*val categoryItemAdapter = CategoryListAdapter(this, categoryList, category)
+            rv_kategori_list.adapter = categoryItemAdapter*/
+
+            //filterByCategory(category, categoryList)
+            refreshAll()
+        }
+    }
+
+    private fun refreshAll() {
+        loadCategory()
+        loadProductBy(categoryActive, "")
+    }
+
+    private fun loadProductBy(categoryActive: String, inputText: String) {
+        if (categoryActive.equals("All")){
+            rv_menu_list.hasFixedSize()
+            rv_menu_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+            val tempList = arrayListOf<Product>()
+            filteredProductList = tempList
+
+            if (inputText == null || inputText.equals("")){
+                for (i in 0..productList.size-1){
+                    filteredProductList.add(productList[i])
+                }
+            } else {
+                for (i in 0..productList.size-1){
+                    if (productList[i].name.contains(inputText, ignoreCase = true)){
+                        filteredProductList.add(productList[i])
+                    }
+                }
+            }
+
+            val productItemAdapter = ProductListAdapter(this, filteredProductList)
+            rv_menu_list.adapter = productItemAdapter
+
+            productItemAdapter.onItemClick = { product ->
+                if (product.chose_amount == 1){
+                    tempSelectedProduct.add(product.id)
+                    //selectedProduct = selectedProduct.distinct() as ArrayList<Int>
+                }
+
+                if (product.chose_amount < 1){
+                    //tempSelectedProduct.filterTo(arraytwo, { it != product.name})
+                    tempSelectedProduct.remove(product.id)
+                }
+                selectedProduct = tempSelectedProduct.distinct()
+
+                showSelectedButton(selectedProduct)
+            }
+
+        } else {
+            rv_menu_list.hasFixedSize()
+            rv_menu_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+            val tempList = arrayListOf<Product>()
+            filteredProductList = tempList
+
+            if (inputText == null || inputText.equals("")){
+                for (i in 0..productList.size-1){
+                    if (productList[i].category.equals(categoryActive)){
+                        filteredProductList.add(productList[i])
+                    }
+                }
+            } else {
+                for (i in 0..productList.size-1){
+                    if (productList[i].category.equals(categoryActive) && productList[i].name.contains(inputText, ignoreCase = true)){
+                        filteredProductList.add(productList[i])
+                    }
+                }
+            }
+
+            println("Ukuran List: " + filteredProductList.size)
+            println("Isi List: " + filteredProductList)
+            val productItemAdapter = ProductListAdapter(this, filteredProductList)
+            rv_menu_list.adapter = productItemAdapter
+
+            productItemAdapter.onItemClick = { product ->
+                if (product.chose_amount == 1){
+                    tempSelectedProduct.add(product.id)
+                    //selectedProduct = selectedProduct.distinct() as ArrayList<Int>
+                }
+
+                if (product.chose_amount < 1){
+                    //tempSelectedProduct.filterTo(arraytwo, { it != product.name})
+                    tempSelectedProduct.remove(product.id)
+                }
+                selectedProduct = tempSelectedProduct.distinct()
+
+                showSelectedButton(selectedProduct)
+            }
+        }
     }
 
     private fun loadProduct() {
@@ -58,11 +184,27 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
         rv_menu_list.adapter = productItemAdapter
 
         productItemAdapter.onItemClick = { product ->
-            Toast.makeText(this, "Product:  ${product.name} berhasil di klik",
-                Toast.LENGTH_LONG
-            ).show()
+            if (product.chose_amount == 1){
+                tempSelectedProduct.add(product.id)
+                //selectedProduct = selectedProduct.distinct() as ArrayList<Int>
+            }
 
-            println("Yang diklik: " + product.name)
+            if (product.chose_amount < 1){
+                //tempSelectedProduct.filterTo(arraytwo, { it != product.name})
+                tempSelectedProduct.remove(product.id)
+            }
+            selectedProduct = tempSelectedProduct.distinct()
+
+            showSelectedButton(selectedProduct)
+        }
+    }
+
+    private fun showSelectedButton(selectedProduct: List<Int>) {
+        if (selectedProduct.size > 0){
+            layout_btn_selected.visibility = View.VISIBLE
+            txt_selected.text = selectedProduct.size.toString() + " Item Selected"
+        } else {
+            layout_btn_selected.visibility = View.GONE
         }
     }
 
@@ -75,13 +217,4 @@ class MenuListActivity : AppCompatActivity(), ProductRVClickListener {
 
         return empList
     }
-
-    override fun onItemClicked(view: View, product: Product) {
-        Toast.makeText(this, "Product:  ${product.name} berhasil di klik",
-            Toast.LENGTH_LONG
-        ).show()
-
-        println("Yang diklik: " + product.name)
-    }
-
 }

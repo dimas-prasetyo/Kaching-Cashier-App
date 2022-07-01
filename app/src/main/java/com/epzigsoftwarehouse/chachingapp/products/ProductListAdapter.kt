@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.epzigsoftwarehouse.chachingapp.R
-import com.epzigsoftwarehouse.chachingapp.ProductRVClickListener
 import kotlinx.android.synthetic.main.layout_menu.view.*
 import java.io.File
 
 class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
     private var amount_value = 0
-    var listener: ProductRVClickListener? = null
     var onItemClick: ((Product) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,6 +40,8 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
             item.chose_amount = holder.menu_input_amount.getText().toString().toInt()
             item.chose_amount  = item.chose_amount  + 1
             holder.menu_input_amount.setText(item.chose_amount .toString())
+
+            onItemClick?.invoke(items[position])
         }
 
         holder.menu_minus_item.setOnClickListener {
@@ -60,12 +60,18 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
                     holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.primaryTextBlack))
                     holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.black))
 
+                    onItemClick?.invoke(items[position])
                 }
             }
         }
 
         holder.area_click.setOnClickListener {
-            item.chose_amount = 1
+            if (holder.menu_input_amount.getText().toString().toInt() < 1){
+                item.chose_amount = 1
+            } else {
+                item.chose_amount = holder.menu_input_amount.getText().toString().toInt()
+            }
+
             holder.layout_menu_list.setPadding(7, 3, 7, 3)
             holder.menu_input_amount.setText(item.chose_amount .toString())
             holder.layout_amount.visibility = View.VISIBLE
