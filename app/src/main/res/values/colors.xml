@@ -33,4 +33,8 @@
     <color name="redHeart">#A32B2B</color>
     <color name="redPrimary">#BB1E10</color>
 
+    <color name="greenSuccess">#00AB26</color>
+    <color name="redFailed">#FA113D</color>
+    <color name="yellowInfo">#FFFF00</color>
+
 </resources>

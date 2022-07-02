@@ -2,19 +2,18 @@ package com.epzigsoftwarehouse.chachingapp
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -35,6 +34,9 @@ class AddingMenuActivity : AppCompatActivity() {
     private lateinit var unit_input: String
     private lateinit var photo_path_input: String
     private lateinit var barcode_input: String
+    //private var product_id by Delegates.notNull<Int>()
+    private var statusProduct = "create"
+    private var idProduct = 0
 
     private val GALLERY_READ_REQUEST_CODE: Int =  104
     private var imagePath = ""
@@ -45,17 +47,46 @@ class AddingMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_menu)
 
-        btn_done.setOnClickListener {
-            val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-            if (checkForm() == true){
-                try {
-                    val status = databaseHandler.addProduct(Product(0, category_input, name_input, price_input, proportion_input, unit_input, amount_input, photo_path_input, barcode_input, 0))
-                    if (status > -1) {
-                        // Sukses
-                        println("Sukses Menambahkan data")
-                    }
-                } catch (e: Exception){
+        try {
+            var product_id = intent.getStringExtra("product_id").toString().toInt()
 
+            if (product_id != null){
+                loadMenuDetail(product_id)
+            }
+            statusProduct = "edit"
+            idProduct = product_id
+        } catch (e: Exception){
+
+        }
+
+        btn_done.setOnClickListener {
+            if (statusProduct.equals("edit")){
+                val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+                if (checkForm() == true){
+                    try {
+                        val status = databaseHandler.updateProduct(Product(idProduct, category_input, name_input, price_input, proportion_input, unit_input, amount_input, photo_path_input, barcode_input, 0))
+                        if (status > -1) {
+                            showSuccessDialog()
+                        } else {
+                            showFailedDialog()
+                        }
+                    } catch (e: Exception){
+
+                    }
+                }
+            } else {
+                val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+                if (checkForm() == true){
+                    try {
+                        val status = databaseHandler.addProduct(Product(0, category_input, name_input, price_input, proportion_input, unit_input, amount_input, photo_path_input, barcode_input, 0))
+                        if (status > -1) {
+                            showSuccessDialog()
+                        } else {
+                            showFailedDialog()
+                        }
+                    } catch (e: Exception){
+
+                    }
                 }
             }
         }
@@ -78,12 +109,38 @@ class AddingMenuActivity : AppCompatActivity() {
             showInfoProportion()
         }
 
-        cv_button_scan_barcode.setOnClickListener {
-            /*val intent = Intent(this, BarcodeScannerActivity::class.java)
-            startActivity(intent)*/
+        cv_info_unit.setOnClickListener {
+            showInfoUnit()
+        }
 
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
+
+        cv_button_scan_barcode.setOnClickListener {
             val i = Intent(this, BarcodeScannerActivity::class.java)
             startActivityForResult(i, 100)
+        }
+    }
+
+    private fun loadMenuDetail(productId: Int) {
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        //calling the viewEmployee method of DatabaseHandler class to read the records
+        val product: Product = databaseHandler.getProduct(productId)
+
+        input_category.setText(product.category)
+        input_name.setText(product.name)
+        input_price.setText(product.price.toString())
+        input_proportion.setText(product.proportion.toString())
+        input_unit.setText(product.unit)
+        input_amount.setText(product.amount.toString())
+        input_barcode.setText(product.barcode)
+
+        val imgFile = File(product.photo_path)
+        if (imgFile.exists()) {
+            imagePath = product.photo_path
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            product_photo.setImageBitmap(myBitmap)
         }
     }
 
@@ -93,8 +150,14 @@ class AddingMenuActivity : AppCompatActivity() {
         val layoutShowInfo = AlertDialog.Builder(this)
         layoutShowInfo.setView(promptView)
 
-        val txt_info = promptView.findViewById<TextView>(R.id.txt_info) as TextView
-        txt_info.text = "Show Info Tentang Proportion dan Unit"
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.yellowInfo))
+        icon_dialog.setImageResource(R.drawable.icon_info_outline)
+
+        txt_info.text = "Proportion is the size or portion of the item you want to add (optional)."
 
         // create an alert dialog
         val layoutInput: AlertDialog = layoutShowInfo.create()
@@ -106,6 +169,106 @@ class AddingMenuActivity : AppCompatActivity() {
         infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         infoDialogBox.show()
+    }
+
+    private fun showInfoUnit() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_info_dialog_box, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.yellowInfo))
+        icon_dialog.setImageResource(R.drawable.icon_info_outline)
+
+        txt_info.text = "Unit is the unit of measure of the proportion value (optional)."
+
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        // create an loading dialog
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+    }
+
+    private fun showSuccessDialog() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_info_dialog_box, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setCancelable(false)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.greenSuccess))
+        icon_dialog.setImageResource(R.drawable.icon_done)
+
+        if (statusProduct.equals("edit")){
+            txt_info.text = "Successfully changed data"
+        } else {
+            txt_info.text = "Successfully added data"
+        }
+
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        // create an loading dialog
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        Handler().postDelayed({
+            infoDialogBox.dismiss()
+            onBackPressed()
+        }, 2000)
+    }
+
+    private fun showFailedDialog() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_info_dialog_box, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setCancelable(false)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.redFailed))
+        icon_dialog.setImageResource(R.drawable.icon_failed)
+
+        if (statusProduct.equals("edit")){
+            txt_info.text = "Failed to changed data"
+        } else {
+            txt_info.text = "Failed to added data"
+        }
+
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        // create an loading dialog
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        Handler().postDelayed({
+            infoDialogBox.dismiss()
+        }, 2000)
     }
 
     private fun deleteProductImage() {

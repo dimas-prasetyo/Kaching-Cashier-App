@@ -22,11 +22,11 @@
         android:id="@+id/btn_back"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_back"
-        android:layout_alignTop="@id/card_view_search"
         android:layout_alignBottom="@id/card_view_search"
+        android:layout_alignTop="@id/card_view_search"
         android:padding="8dp"
-        android:translationZ="90dp"/>
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_search"
@@ -71,17 +71,24 @@
         android:layout_below="@id/rv_kategori_list"
         android:layout_marginTop="10dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_alignParentBottom="true"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="25dp"
         android:backgroundTint="@color/primary_dark"
-        android:src="@drawable/icon_add"
-        android:visibility="visible"/>
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/cv_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_add"
+            android:padding="5dp"
+            app:tint="@color/white"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

@@ -1,13 +1,13 @@
 package com.epzigsoftwarehouse.chachingapp.products
 
 data class Product(
-        val id: Int,
-        val category: String,
-        val name: String,
-        val price: Double,
-        val proportion: Double,
-        val unit: String,
-        val amount: Int,
-        val photo_path: String,
-        val barcode: String,
+        var id: Int,
+        var category: String,
+        var name: String,
+        var price: Double,
+        var proportion: Double,
+        var unit: String,
+        var amount: Int,
+        var photo_path: String,
+        var barcode: String,
         var chose_amount: Int)

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
 import com.epzigsoftwarehouse.chachingapp.products.CategoryListAdapter
@@ -154,8 +153,6 @@ class MenuListActivity : AppCompatActivity(){
                 }
             }
 
-            println("Ukuran List: " + filteredProductList.size)
-            println("Isi List: " + filteredProductList)
             val productItemAdapter = ProductListAdapter(this, filteredProductList)
             rv_menu_list.adapter = productItemAdapter
 
@@ -213,7 +210,7 @@ class MenuListActivity : AppCompatActivity(){
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val empList: ArrayList<Product> = databaseHandler.viewProduct()
+        val empList: ArrayList<Product> = databaseHandler.viewAllProduct()
 
         return empList
     }

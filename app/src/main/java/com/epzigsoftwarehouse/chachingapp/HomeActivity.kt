@@ -12,14 +12,27 @@ class HomeActivity : AppCompatActivity() {
 
         card_view_menu_1.setOnClickListener {
             val intent = Intent(this, MenuListActivity::class.java)
-            startActivity(intent) }
+            startActivity(intent)
+        }
 
         card_view_menu_2.setOnClickListener {
             val intent = Intent(this, AddingMenuActivity::class.java)
-            startActivity(intent) }
+            startActivity(intent)
+        }
 
         card_view_menu_3.setOnClickListener {
             val intent = Intent(this, MenuEditableActivity::class.java)
-            startActivity(intent) }
+            startActivity(intent)
+        }
+
+        card_view_menu_5.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        card_view_menu_6.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

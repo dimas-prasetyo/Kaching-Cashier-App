@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddingCashierActivity">
+
+    <TextView
+        style="@style/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_photo"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Photo" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_layout_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/txt_photo"
+                android:layout_marginTop="5dp"
+                android:elevation="0dp"
+                app:strokeColor="@color/colorGray"
+                app:strokeWidth="0.5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cv_product_photo"
+                        android:layout_alignTop="@id/cv_product_photo"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/cv_product_photo"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_btn_add"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="@color/primary_light"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="5dp"
+                            app:strokeColor="@color/primary_dark"
+                            app:strokeWidth="1dp">
+
+                            <ImageView
+                                android:id="@+id/btn_add"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="8dp"
+                                android:src="@drawable/icon_add"
+                                app:tint="@color/primary_dark" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_btn_delete"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="15dp"
+                            android:backgroundTint="@color/primary_dark"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="5dp">
+
+                            <ImageView
+                                android:id="@+id/btn_delete"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="8dp"
+                                android:src="@drawable/icon_delete"
+                                app:tint="@color/primary_light" />
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_product_photo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/primary_dark"
+                        app:strokeWidth="1dp">
+
+                        <ImageView
+                            android:id="@+id/cashier_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorGray" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txt_name"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_photo"
+                android:layout_below="@id/cv_layout_photo"
+                android:layout_marginTop="10dp"
+                android:text="Name" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cv_layout_photo"
+                android:layout_alignRight="@id/cv_layout_photo"
+                android:layout_below="@id/txt_name"
+                android:layout_marginTop="5dp"
+                android:elevation="0dp"
+                app:strokeColor="@color/colorGray"
+                app:strokeWidth="0.5dp">
+
+                <EditText
+                    android:id="@+id/input_name"
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_category"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:backgroundTint="@color/primary_dark"
+                    android:hint="Input Name"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txt_position"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_photo"
+                android:layout_below="@id/cv_input_name"
+                android:layout_marginTop="10dp"
+                android:text="Position/Job" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_input_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cv_layout_photo"
+                android:layout_alignRight="@id/cv_layout_photo"
+                android:layout_below="@id/txt_position"
+                android:layout_marginTop="5dp"
+                android:elevation="0dp"
+                app:strokeColor="@color/colorGray"
+                app:strokeWidth="0.5dp">
+
+                <EditText
+                    android:id="@+id/input_position"
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_category"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:backgroundTint="@color/primary_dark"
+                    android:hint="Input Position or Job"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/txt_contact"
+                style="@style/textSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/txt_photo"
+                android:layout_below="@id/cv_input_position"
+                android:layout_marginTop="10dp"
+                android:text="Contact" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_input_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cv_layout_photo"
+                android:layout_alignRight="@id/cv_layout_photo"
+                android:layout_below="@id/txt_contact"
+                android:layout_marginTop="5dp"
+                android:elevation="0dp"
+                app:strokeColor="@color/colorGray"
+                app:strokeWidth="0.5dp">
+
+                <EditText
+                    android:id="@+id/input_contact"
+                    style="@style/textPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_category"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:backgroundTint="@color/primary_dark"
+                    android:hint="Input Contact"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/primary_dark"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Done"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

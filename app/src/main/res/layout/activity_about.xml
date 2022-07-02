@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/main_background"/>
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_about_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon_info"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignLeft="@id/cv_icon_app"
+                        android:layout_alignRight="@id/cv_icon_app"
+                        android:layout_below="@id/cv_icon_app"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_info_outline" />
+
+                    <ImageView
+                        android:id="@+id/icon_language"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignLeft="@id/cv_icon_app"
+                        android:layout_alignRight="@id/cv_icon_app"
+                        android:layout_below="@id/icon_info"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_kotlin" />
+
+                    <TextView
+                        android:id="@+id/txt_about_app"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="About App"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_version_app"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_app_name"
+                        android:layout_alignTop="@id/icon_info"
+                        android:layout_marginTop="5dp"
+                        android:text="Version"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/value_version_app"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_version_app"
+                        android:layout_below="@id/txt_version_app"
+                        android:text="1.0.0"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_app_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cv_icon_app"
+                        android:layout_alignTop="@id/cv_icon_app"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@id/cv_icon_app"
+                        android:gravity="center_vertical"
+                        android:text="Kaching: Cashier App"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_app_name"
+                        android:layout_alignTop="@id/icon_language"
+                        android:layout_marginTop="5dp"
+                        android:text="Programming Language"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/value_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_app_name"
+                        android:layout_below="@id/txt_language"
+                        android:text="Kotlin"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_icon_app"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_below="@id/txt_about_app"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="30dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@color/primary_dark" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_about_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_alignLeft="@id/cv_about_app"
+                android:layout_alignRight="@id/cv_about_app"
+                android:layout_below="@id/cv_about_app"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon_person"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignLeft="@id/txt_about_Person"
+                        android:layout_below="@id/txt_about_Person"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_user" />
+
+                    <ImageView
+                        android:id="@+id/icon_person_email"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignLeft="@id/icon_person"
+                        android:layout_below="@id/icon_person"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_email" />
+
+                    <TextView
+                        android:id="@+id/txt_about_Person"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Person"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_person"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/icon_person"
+                        android:layout_toRightOf="@id/icon_person"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Dimas Bintang Prasetyo"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_person"
+                        android:layout_below="@id/txt_person"
+                        android:text="Android Developer"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_person_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/icon_person_email"
+                        android:layout_alignBottom="@id/icon_person_email"
+                        android:gravity="center_vertical"
+                        android:layout_alignLeft="@id/txt_person"
+                        android:text="d.bintangprasetyo@gmail.com"
+                        android:textSize="17sp" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_about_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_alignLeft="@id/cv_about_app"
+                android:layout_alignRight="@id/cv_about_app"
+                android:layout_below="@id/cv_about_person"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icon_publisher"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignLeft="@id/txt_about_publisher"
+                        android:layout_below="@id/txt_about_publisher"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_business" />
+
+                    <TextView
+                        android:id="@+id/txt_about_publisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Publisher"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_publisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/icon_publisher"
+                        android:layout_toRightOf="@id/icon_publisher"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Epzig Software House"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_publisher_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/txt_publisher"
+                        android:layout_below="@id/txt_publisher"
+                        android:text="epzigdeveloper@gmail.com"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

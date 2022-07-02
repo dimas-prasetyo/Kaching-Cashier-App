@@ -73,7 +73,7 @@ class DatabaseHandler (context: Context?) :
     }
 
     @SuppressLint("Range")
-    fun viewProduct(): ArrayList<Product> {
+    fun viewAllProduct(): ArrayList<Product> {
 
         val empList: ArrayList<Product> = ArrayList<Product>()
 
@@ -122,5 +122,61 @@ class DatabaseHandler (context: Context?) :
             } while (cursor.moveToNext())
         }
         return empList
+    }
+
+    @SuppressLint("Range")
+    fun getProduct(_id: Int): Product {
+        val product = Product(0,"", "", 0.00, 0.00,"", 0, "", "", 0)
+        val db = writableDatabase
+
+        val selectQuery = "SELECT  * FROM $TABLE_PRODUCTS WHERE $KEY_ID == $_id"
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor != null) {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    product.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID)))
+                    product.category = cursor.getString(cursor.getColumnIndex(KEY_CATEGORY))
+                    product.name = cursor.getString(cursor.getColumnIndex(KEY_NAME))
+                    product.price = cursor.getDouble(cursor.getColumnIndex(KEY_PRICE))
+                    product.proportion = cursor.getDouble(cursor.getColumnIndex(KEY_PROPORTION))
+                    product.unit = cursor.getString(cursor.getColumnIndex(KEY_UNIT))
+                    product.amount = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_AMOUNT)))
+                    product.photo_path = cursor.getString(cursor.getColumnIndex(KEY_PHOTO_PATH))
+                    product.barcode = cursor.getString(cursor.getColumnIndex(KEY_BARCODE))
+                    product.chose_amount = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_CHOSE_AMOUNT)))
+
+                } while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return product
+    }
+
+    fun updateProduct(product: Product): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(KEY_CATEGORY, product.category)
+        values.put(KEY_NAME, product.name)
+        values.put(KEY_PRICE, product.price)
+        values.put(KEY_PROPORTION, product.proportion)
+        values.put(KEY_UNIT, product.unit)
+        values.put(KEY_AMOUNT, product.amount)
+        values.put(KEY_PHOTO_PATH, product.photo_path)
+        values.put(KEY_BARCODE, product.barcode)
+        values.put(KEY_CHOSE_AMOUNT, product.chose_amount)
+
+        val _success = db.update(TABLE_PRODUCTS, values, KEY_ID + "=?", arrayOf(product.id.toString())).toLong()
+        db.close()
+        //return Integer.parseInt("$_success") != -1
+        return _success
+    }
+
+    fun deleteTask(_id: Int): Long {
+        val db = this.writableDatabase
+        val _success = db.delete(TABLE_PRODUCTS, KEY_ID + "=?", arrayOf(_id.toString())).toLong()
+        db.close()
+        return _success
     }
 }

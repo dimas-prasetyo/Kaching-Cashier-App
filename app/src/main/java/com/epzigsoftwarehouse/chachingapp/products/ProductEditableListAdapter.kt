@@ -1,12 +1,15 @@
 package com.epzigsoftwarehouse.chachingapp.products
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.epzigsoftwarehouse.chachingapp.AddingMenuActivity
 import com.epzigsoftwarehouse.chachingapp.R
+import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
 import kotlinx.android.synthetic.main.layout_menu_editable.view.*
 import java.io.File
 
@@ -27,6 +30,21 @@ class ProductEditableListAdapter (val context: Context?, val items: ArrayList<Pr
         if (imgFile.exists()) {
             val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
             holder.image_menu.setImageBitmap(myBitmap)
+        }
+
+        holder.cv_btn_edit.setOnClickListener {
+            val productDetailIntent = Intent(context, AddingMenuActivity::class.java)
+            productDetailIntent.putExtra("product_id", item.id.toString())
+
+            context?.startActivity(productDetailIntent)
+        }
+
+        holder.cv_btn_delete.setOnClickListener {
+            val databaseHandler: DatabaseHandler = DatabaseHandler(context)
+            val deleteProduct = databaseHandler.deleteTask(item.id)
+            if (deleteProduct > -1) {
+                println("Berhasil menghapus")
+            }
         }
     }
 
