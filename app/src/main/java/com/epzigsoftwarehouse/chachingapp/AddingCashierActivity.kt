@@ -18,11 +18,17 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.epzigsoftwarehouse.chachingapp.cashier.Cashier
+import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
 import kotlinx.android.synthetic.main.activity_adding_cashier.*
 import net.alhazmy13.mediapicker.Image.ImagePicker
 import java.io.File
 
 class AddingCashierActivity : AppCompatActivity() {
+    private lateinit var name_input: String
+    private lateinit var position_input: String
+    private lateinit var contact_input: String
+    private lateinit var photo_path_input: String
     private var statusCashier = "create"
     private var idCashier= 0
 
@@ -58,10 +64,71 @@ class AddingCashierActivity : AppCompatActivity() {
             }
         }
         cv_btn_delete.visibility = View.GONE
+
+        btn_done.setOnClickListener {
+            if (statusCashier.equals("edit")){
+                val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+                if (checkForm() == true){
+                    try {
+                        val status = databaseHandler.updateCashier(Cashier(0, name_input, position_input, photo_path_input,contact_input))
+                        if (status > -1) {
+                            showSuccessDialog()
+                        } else {
+                            showFailedDialog()
+                        }
+                    } catch (e: Exception){
+
+                    }
+                }
+            } else {
+                val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+                if (checkForm() == true){
+                    try {
+                        val status = databaseHandler.addCashier(Cashier(0, name_input, position_input, photo_path_input,contact_input))
+                        if (status > -1) {
+                            showSuccessDialog()
+                        } else {
+                            showFailedDialog()
+                        }
+                    } catch (e: Exception){
+
+                    }
+                }
+            }
+        }
     }
 
     private fun loadCashierDetail() {
 
+    }
+
+    private fun checkForm(): Boolean {
+        if (1 == 1){
+            if (input_name.text.equals("") || input_name.text == null){
+                input_name.setError("Please input email")
+                return false
+            } else {
+                name_input = input_name.getText().toString()
+
+                if (input_position.getText().toString() == "" || input_position.getText() == null){
+                    position_input = ""
+                } else {
+                    position_input = input_position.getText().toString()
+                }
+
+                if (input_contact.getText().toString() == "" || input_contact.getText() == null){
+                    contact_input = ""
+                } else {
+                    contact_input = input_contact.getText().toString()
+                }
+
+                photo_path_input = imagePath
+
+                return true
+            }
+        } else {
+            return false
+        }
     }
 
     private fun showSuccessDialog() {

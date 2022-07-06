@@ -16,12 +16,17 @@ class HomeActivity : AppCompatActivity() {
         }
 
         card_view_menu_2.setOnClickListener {
-            val intent = Intent(this, AddingMenuActivity::class.java)
+            val intent = Intent(this, MenuEditableActivity::class.java)
             startActivity(intent)
         }
 
         card_view_menu_3.setOnClickListener {
             val intent = Intent(this, MenuEditableActivity::class.java)
+            startActivity(intent)
+        }
+
+        card_view_menu_4.setOnClickListener {
+            val intent = Intent(this, CashierListActivity::class.java)
             startActivity(intent)
         }
 

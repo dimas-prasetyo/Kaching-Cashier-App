@@ -13,15 +13,69 @@
         android:layout_centerInParent="true"/>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_logo_store"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:elevation="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        app:cardCornerRadius="5dp"
+        app:strokeColor="@color/primary_dark"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/logo_store"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorGrayDark"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/txt_store_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/cv_logo_store"
+        android:layout_alignTop="@id/cv_logo_store"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@id/cv_logo_store"
+        android:gravity="center_vertical"
+        android:text="Store Name"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/cv_logo_store"
+        android:layout_below="@id/cv_logo_store"
+        android:layout_marginTop="20dp"
+        android:text="10:45"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/cv_logo_store"
+        android:layout_below="@id/txt_time"
+        android:textColor="@color/black"
+        android:text="6 Juli 2022"
+        android:textSize="18sp"/>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/background_rounded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="10dp"
-        app:cardCornerRadius="40dp"
         android:layout_alignTop="@id/center"
-        android:layout_marginTop="-150dp"
+        android:layout_marginTop="-100dp"
+        android:backgroundTint="@color/colorWhiteDark"
+        android:elevation="10dp"
         android:translationZ="-90dp"
-        android:backgroundTint="@color/colorWhiteDark"/>
+        app:cardCornerRadius="40dp" />
 
     <LinearLayout
         android:id="@+id/layout_menu_1"

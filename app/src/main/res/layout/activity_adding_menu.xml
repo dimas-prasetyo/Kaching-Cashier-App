@@ -60,6 +60,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="Input Category"
+                    android:inputType="textShortMessage"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -89,6 +90,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="Input Name"
+                    android:inputType="textPersonName"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -131,7 +133,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="0"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="22sp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -161,7 +163,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="0"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>

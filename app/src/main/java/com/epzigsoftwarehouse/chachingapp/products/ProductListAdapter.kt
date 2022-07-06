@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.epzigsoftwarehouse.chachingapp.R
@@ -24,7 +25,19 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items.get(position)
 
-        item.chose_amount = holder.menu_input_amount.getText().toString().toInt()
+        println("Jumlah baru 01: " + item.chose_amount)
+        //item.chose_amount = holder.menu_input_amount.getText().toString().toInt()
+
+        if (item.chose_amount > 0){
+            holder.layout_menu_list.setPadding(7, 3, 7, 3)
+            holder.menu_input_amount.setText(item.chose_amount .toString())
+            holder.layout_amount.visibility = View.VISIBLE
+            holder.bg_layout_menu.setBackgroundColor(ContextCompat.getColor(context!!, R.color.primary_dark))
+
+            holder.menu_name.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.white))
+        }
 
         holder.menu_name.text = item.name
         holder.menu_proportions.text = item.proportion.toString() + " " + item.unit + " x " + item.amount.toString()
@@ -41,7 +54,7 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
             item.chose_amount  = item.chose_amount  + 1
             holder.menu_input_amount.setText(item.chose_amount .toString())
 
-            onItemClick?.invoke(items[position])
+            onItemClick?.invoke(item)
         }
 
         holder.menu_minus_item.setOnClickListener {
@@ -60,8 +73,8 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
                     holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.primaryTextBlack))
                     holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.black))
 
-                    onItemClick?.invoke(items[position])
                 }
+                onItemClick?.invoke(item)
             }
         }
 
@@ -81,7 +94,7 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
             holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.white))
             holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.white))
 
-            onItemClick?.invoke(items[position])
+            onItemClick?.invoke(item)
 
         }
 

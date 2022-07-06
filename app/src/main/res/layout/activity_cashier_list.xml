@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CashierListActivity">
+
+    <TextView
+        style="@style/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_active_cashier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/btn_back"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:id="@+id/layout_active_cashier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_dark">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_image_cashier"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:elevation="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/image_cashier"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@color/white"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/cashier_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cv_image_cashier"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/cv_unactive_cashier"
+                android:layout_toRightOf="@id/cv_image_cashier"
+                android:maxHeight="40dp"
+                android:text="Cashier Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cashier_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cashier_name"
+                android:layout_alignRight="@id/cashier_name"
+                android:layout_below="@id/cashier_name"
+                android:text="Cashier Job"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_unactive_cashier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:elevation="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/txt_unactive_cashier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unactive"
+                    android:textColor="@color/primary_dark"
+                    android:padding="5dp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/no_cashier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The cashier has not been selected"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cashier_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cv_active_cashier"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/txt_no_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No cashiers added yet"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="25dp"
+        android:backgroundTint="@color/primary_dark"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/cv_add_cashier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_add"
+            android:padding="5dp"
+            app:tint="@color/white"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

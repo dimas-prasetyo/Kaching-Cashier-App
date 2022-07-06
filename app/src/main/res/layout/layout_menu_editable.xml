@@ -108,7 +108,7 @@
                     app:strokeWidth="1dp">
 
                     <ImageView
-                        android:id="@+id/button_1"
+                        android:id="@+id/btn_edit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp"
@@ -127,7 +127,7 @@
                     app:cardCornerRadius="5dp">
 
                     <ImageView
-                        android:id="@+id/button_2"
+                        android:id="@+id/btn_delete"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp"

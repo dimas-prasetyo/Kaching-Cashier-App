@@ -28,6 +28,7 @@ class CategoryListAdapter (val context: Context?, val items: List<String>, val a
             holder.bg_category.setBackgroundColor(ContextCompat.getColor(context!!, R.color.primary_dark))
             holder.text_category.setTextColor(ContextCompat.getColor(context, R.color.white))
         }
+
         holder.text_category.setOnClickListener {
             onItemClick?.invoke(items[position])
         }

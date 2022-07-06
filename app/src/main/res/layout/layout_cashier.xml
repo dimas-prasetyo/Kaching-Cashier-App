@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="15dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_layout_cashier"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        app:cardCornerRadius="15dp"
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:id="@+id/bg_layout_cashier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_light">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_image_cashier"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/image_cashier"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_scan" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/cashier_name"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cv_image_cashier"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/btn_choose_cashier"
+                android:layout_toRightOf="@id/cv_image_cashier"
+                android:maxHeight="50dp"
+                android:text="Tes nama\nalnjdbjd"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cashier_position"
+                style="@style/textSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cashier_name"
+                android:layout_alignRight="@id/cashier_name"
+                android:layout_below="@id/cashier_name"
+                android:layout_marginTop="5dp"
+                android:maxHeight="20dp"
+                android:text="Cashiier"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/cashier_contact"
+                style="@style/textPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/cashier_name"
+                android:layout_alignRight="@id/cashier_name"
+                android:layout_below="@id/cashier_position"
+                android:layout_marginTop="5dp"
+                android:maxHeight="20dp"
+                android:text="-"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_choose_cashier"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/primary_dark"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <TextView
+                    android:id="@+id/txt_active_cashier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Active"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

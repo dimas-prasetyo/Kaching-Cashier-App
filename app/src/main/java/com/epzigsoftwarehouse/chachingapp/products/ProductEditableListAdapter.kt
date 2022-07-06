@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.layout_menu_editable.view.*
 import java.io.File
 
 class ProductEditableListAdapter (val context: Context?, val items: ArrayList<Product>) : RecyclerView.Adapter<ProductEditableListAdapter.ViewHolder>() {
+    var onDeleteItemClick: ((Product) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_menu_editable, parent, false))
@@ -32,19 +33,21 @@ class ProductEditableListAdapter (val context: Context?, val items: ArrayList<Pr
             holder.image_menu.setImageBitmap(myBitmap)
         }
 
-        holder.cv_btn_edit.setOnClickListener {
+        holder.btn_edit.setOnClickListener {
             val productDetailIntent = Intent(context, AddingMenuActivity::class.java)
             productDetailIntent.putExtra("product_id", item.id.toString())
 
             context?.startActivity(productDetailIntent)
         }
 
-        holder.cv_btn_delete.setOnClickListener {
-            val databaseHandler: DatabaseHandler = DatabaseHandler(context)
-            val deleteProduct = databaseHandler.deleteTask(item.id)
+        holder.btn_delete.setOnClickListener {
+            /*val databaseHandler: DatabaseHandler = DatabaseHandler(context)
+            val deleteProduct = databaseHandler.deleteProduct(item.id)
             if (deleteProduct > -1) {
                 println("Berhasil menghapus")
-            }
+            }*/
+            println("Delete diklik (Adapter): " + item.name)
+            onDeleteItemClick?.invoke(item)
         }
     }
 
@@ -64,5 +67,9 @@ class ProductEditableListAdapter (val context: Context?, val items: ArrayList<Pr
 
         val cv_btn_edit = view.cv_btn_edit
         val cv_btn_delete = view.cv_btn_delete
+
+        val btn_edit = view.btn_edit
+        val btn_delete = view.btn_delete
+
     }
 }
