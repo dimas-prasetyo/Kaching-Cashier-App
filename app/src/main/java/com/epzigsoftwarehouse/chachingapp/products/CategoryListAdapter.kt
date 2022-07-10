@@ -24,7 +24,6 @@ class CategoryListAdapter (val context: Context?, val items: List<String>, val a
 
         holder.text_category.text = item
         if (item.equals(activeTab)){
-            //holder.cv_kategory.backgroundTintList = ColorStateList.valueOf(R.color.primary_dark)
             holder.bg_category.setBackgroundColor(ContextCompat.getColor(context!!, R.color.primary_dark))
             holder.text_category.setTextColor(ContextCompat.getColor(context, R.color.white))
         }

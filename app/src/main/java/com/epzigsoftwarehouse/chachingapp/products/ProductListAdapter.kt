@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.layout_menu.view.*
 import java.io.File
 
 class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
-    private var amount_value = 0
     var onItemClick: ((Product) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,9 +23,6 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items.get(position)
-
-        println("Jumlah baru 01: " + item.chose_amount)
-        //item.chose_amount = holder.menu_input_amount.getText().toString().toInt()
 
         if (item.chose_amount > 0){
             holder.layout_menu_list.setPadding(7, 3, 7, 3)
@@ -65,7 +61,6 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
 
                 if (item.chose_amount == 0){
                     holder.layout_menu_list.setPadding(0, 0, 0, 0)
-                    //holder.cv_layout_menu.backgroundTintList = ColorStateList.valueOf(R.color.primary_light)
                     holder.bg_layout_menu.setBackgroundColor(ContextCompat.getColor(context!!, R.color.primary_light))
                     holder.layout_amount.visibility = View.GONE
 
@@ -121,11 +116,5 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
         val menu_input_amount = view.menu_input_amount
         val menu_add_item = view.menu_add_item
 
-        /*init {
-            area_click.setOnClickListener {
-                onItemClick?.invoke(items[adapterPosition])
-                //menuGetSelected()
-            }
-        }*/
     }
 }

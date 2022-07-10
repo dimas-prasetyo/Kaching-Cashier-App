@@ -126,6 +126,7 @@
                         android:text="0"
                         android:textSize="18sp"
                         android:inputType="number"
+                        android:editable="false"
                         android:textAlignment="center"/>
 
                 </com.google.android.material.card.MaterialCardView>

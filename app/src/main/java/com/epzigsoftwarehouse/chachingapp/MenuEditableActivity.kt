@@ -304,6 +304,9 @@ class MenuEditableActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
 
     override fun onResume() {
         refreshAll()

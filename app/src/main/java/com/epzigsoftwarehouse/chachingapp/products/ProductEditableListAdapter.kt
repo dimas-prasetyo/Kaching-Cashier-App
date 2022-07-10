@@ -41,12 +41,6 @@ class ProductEditableListAdapter (val context: Context?, val items: ArrayList<Pr
         }
 
         holder.btn_delete.setOnClickListener {
-            /*val databaseHandler: DatabaseHandler = DatabaseHandler(context)
-            val deleteProduct = databaseHandler.deleteProduct(item.id)
-            if (deleteProduct > -1) {
-                println("Berhasil menghapus")
-            }*/
-            println("Delete diklik (Adapter): " + item.name)
             onDeleteItemClick?.invoke(item)
         }
     }

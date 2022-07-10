@@ -1,5 +1,9 @@
 package com.epzigsoftwarehouse.chachingapp.products
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Product(
         var id: Int,
         var category: String,
@@ -10,4 +14,4 @@ data class Product(
         var amount: Int,
         var photo_path: String,
         var barcode: String,
-        var chose_amount: Int)
+        var chose_amount: Int): Parcelable

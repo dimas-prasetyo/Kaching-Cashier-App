@@ -60,7 +60,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="Input Category"
-                    android:inputType="textShortMessage"
+                    android:inputType="textPersonName"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -192,6 +192,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
+                    android:inputType="textPersonName"
                     android:hint="Input Name"
                     android:textSize="20sp" />
 

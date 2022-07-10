@@ -2,7 +2,9 @@ package com.epzigsoftwarehouse.chachingapp
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -10,6 +12,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -23,6 +27,9 @@ import com.epzigsoftwarehouse.chachingapp.products.Product
 import kotlinx.android.synthetic.main.activity_adding_menu.*
 import net.alhazmy13.mediapicker.Image.ImagePicker
 import java.io.File
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 class AddingMenuActivity : AppCompatActivity() {
@@ -34,6 +41,7 @@ class AddingMenuActivity : AppCompatActivity() {
     private lateinit var unit_input: String
     private lateinit var photo_path_input: String
     private lateinit var barcode_input: String
+    private lateinit var currency: String
     //private var product_id by Delegates.notNull<Int>()
     private var statusProduct = "create"
     private var idProduct = 0
@@ -42,6 +50,7 @@ class AddingMenuActivity : AppCompatActivity() {
     private var imagePath = ""
 
     private lateinit var infoDialogBox: AlertDialog
+    lateinit var temp_setting: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +66,13 @@ class AddingMenuActivity : AppCompatActivity() {
             idProduct = product_id
         } catch (e: Exception){
 
+        }
+
+        temp_setting = getSharedPreferences("setting_info", Context.MODE_PRIVATE)
+        currency = temp_setting.getString("currency", "").toString()
+
+        if (currency.equals("dollar")){
+            txt_currency.text = "$"
         }
 
         btn_done.setOnClickListener {
@@ -121,6 +137,83 @@ class AddingMenuActivity : AppCompatActivity() {
             val i = Intent(this, BarcodeScannerActivity::class.java)
             startActivityForResult(i, 100)
         }
+/*
+        input_price.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                input_price.removeTextChangedListener(this)
+
+                try {
+                    var originalString = s.toString()
+                    val longval: Long
+
+                    val re = Regex("[^A-Za-z0-9 ]")
+                    originalString = re.replace(originalString, "")
+
+                    longval = originalString.toLong()
+
+                    val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+                    formatter.applyPattern("#,###,###,###")
+                    var formattedString = formatter.format(longval)
+
+                    if (formattedString.contains(",")) {
+                        formattedString = formattedString.replace(",".toRegex(), ".")
+                    }
+                    //setting text after format to EditText
+                    input_price.setText(formattedString)
+                    input_price.setSelection(input_price.getText().length)
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                }
+
+                input_price.addTextChangedListener(this)
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+        })
+
+        input_proportion.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                input_proportion.removeTextChangedListener(this)
+
+                try {
+                    var originalString = s.toString()
+                    val longval: Long
+
+                    val re = Regex("[^A-Za-z0-9 ]")
+                    originalString = re.replace(originalString, "")
+
+                    longval = originalString.toLong()
+
+                    val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+                    formatter.applyPattern("#,###,###,###")
+                    var formattedString = formatter.format(longval)
+
+                    if (formattedString.contains(",")) {
+                        formattedString = formattedString.replace(",".toRegex(), ".")
+                    }
+                    //setting text after format to EditText
+                    input_proportion.setText(formattedString)
+                    input_proportion.setSelection(input_proportion.getText().length)
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                }
+
+                input_proportion.addTextChangedListener(this)
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+        })
+        */
     }
 
     private fun loadMenuDetail(productId: Int) {
@@ -345,7 +438,7 @@ class AddingMenuActivity : AppCompatActivity() {
                     unit_input = input_unit.getText().toString()
                 }
 
-                if (input_amount.getText().toString() == "" || input_amount.getText() == null){
+                if (input_amount.getText().toString() == "" || input_amount.getText() == null || input_amount.getText().toString() == "0"){
                     amount_input = 1
                 } else {
                     amount_input = input_amount.getText().toString().toInt()

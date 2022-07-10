@@ -10,11 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaChingApp">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".CashierListActivity"
             android:exported="false" />
         <activity
             android:name=".AddingCashierActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
@@ -23,12 +30,14 @@
             android:exported="false" />
         <activity
             android:name=".MenuEditableActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".BarcodeScannerActivity"
             android:exported="false" />
-        <activity android:name=".AddingMenuActivity" />
+        <activity
+            android:name=".AddingMenuActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".MenuListActivity"
             android:windowSoftInputMode="adjustNothing" />
@@ -43,10 +52,10 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

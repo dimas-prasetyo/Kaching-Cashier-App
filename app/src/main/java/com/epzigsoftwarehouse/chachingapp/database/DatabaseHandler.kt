@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import com.epzigsoftwarehouse.chachingapp.HistoryActivity
 import com.epzigsoftwarehouse.chachingapp.cashier.Cashier
 import com.epzigsoftwarehouse.chachingapp.history.History
 import com.epzigsoftwarehouse.chachingapp.products.Product
@@ -356,8 +357,8 @@ class DatabaseHandler (context: Context?) :
 
         val contentValues = ContentValues()
         contentValues.put(KEY_TRANSACTION_ID, history.transaction_id)
-        contentValues.put(KEY_TRANSACTION_DATE, history.date.toString())
-        contentValues.put(KEY_TRANSACTION_TIME, history.time.toString())
+        contentValues.put(KEY_TRANSACTION_DATE, history.date)
+        contentValues.put(KEY_TRANSACTION_TIME, history.time)
         contentValues.put(KEY_TRANSACTION_PRODUCT_ID, history.product_id)
         contentValues.put(KEY_TRANSACTION_PRODUCT_NAME, history.product_name)
         contentValues.put(KEY_TRANSACTION_PRODUCT_PRICE, history.price)
@@ -369,7 +370,7 @@ class DatabaseHandler (context: Context?) :
         return success
     }
 
-    /*@SuppressLint("Range")
+    @SuppressLint("Range")
     fun viewAllHistory(): ArrayList<History> {
 
         val empList: ArrayList<History> = ArrayList<History>()
@@ -388,9 +389,10 @@ class DatabaseHandler (context: Context?) :
         }
 
         var id: Int
-        var transaction_id: Int
-        var date: Date
-        var time: Time
+        var transaction_id: String
+        var date: String
+        var time: String
+        var product_id: Int
         var product_name: String
         var price: Double
         var amount: Int
@@ -401,24 +403,25 @@ class DatabaseHandler (context: Context?) :
                 transaction_id = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_ID))
                 date = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_DATE))
                 time = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_TIME))
+                product_id = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_ID))
                 product_name = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_NAME))
-                price = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_PRICE))
-                amount = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_AMOUNT))
+                price = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_PRICE))
+                amount = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_AMOUNT))
 
-                val emp = Cashier(id = id, transaction_id = transaction_id, date = date, time = time, product_name = product_name, price = price, amount = amount)
+                val emp = History(id = id, transaction_id = transaction_id, date = date, time = time, product_id = product_id, product_name = product_name, price = price, amount = amount)
                 empList.add(emp)
 
             } while (cursor.moveToNext())
         }
         return empList
-    }*/
+    }
 
     fun updateHistory(history: History): Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(KEY_TRANSACTION_ID, history.transaction_id)
-        values.put(KEY_TRANSACTION_DATE, history.date.toString())
-        values.put(KEY_TRANSACTION_TIME, history.time.toString())
+        values.put(KEY_TRANSACTION_DATE, history.date)
+        values.put(KEY_TRANSACTION_TIME, history.time)
         values.put(KEY_TRANSACTION_PRODUCT_ID, history.product_id)
         values.put(KEY_TRANSACTION_PRODUCT_NAME, history.product_name)
         values.put(KEY_TRANSACTION_PRODUCT_PRICE, history.price)
