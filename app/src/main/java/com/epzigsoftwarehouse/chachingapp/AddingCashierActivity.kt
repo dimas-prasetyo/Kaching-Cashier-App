@@ -40,6 +40,19 @@ class AddingCashierActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_cashier)
 
+        cv_btn_delete.visibility = View.GONE
+        try {
+            var cashier_id = intent.getStringExtra("cashier_id").toString().toInt()
+
+            if (cashier_id != null){
+                loadCashierDetail(cashier_id)
+            }
+            statusCashier = "edit"
+            idCashier = cashier_id
+        } catch (e: Exception){
+
+        }
+
         btn_back.setOnClickListener {
             onBackPressed()
         }
@@ -48,7 +61,7 @@ class AddingCashierActivity : AppCompatActivity() {
             var cashier_id = intent.getStringExtra("cashier_id").toString().toInt()
 
             if (cashier_id != null){
-                loadCashierDetail()
+                loadCashierDetail(cashier_id)
             }
             statusCashier = "edit"
             idCashier = cashier_id
@@ -63,14 +76,13 @@ class AddingCashierActivity : AppCompatActivity() {
                 pickImage()
             }
         }
-        cv_btn_delete.visibility = View.GONE
 
         btn_done.setOnClickListener {
             if (statusCashier.equals("edit")){
                 val databaseHandler: DatabaseHandler = DatabaseHandler(this)
                 if (checkForm() == true){
                     try {
-                        val status = databaseHandler.updateCashier(Cashier(0, name_input, position_input, photo_path_input,contact_input))
+                        val status = databaseHandler.updateCashier(Cashier(idCashier, name_input, position_input, photo_path_input,contact_input))
                         if (status > -1) {
                             showSuccessDialog()
                         } else {
@@ -98,7 +110,32 @@ class AddingCashierActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadCashierDetail() {
+    private fun loadCashierDetail(cashierId: Int) {
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        val cashier: Cashier = databaseHandler.getCashierDetail(cashierId)
+
+        val imgFile = File(cashier.photo_path)
+        if (imgFile.exists()) {
+            imagePath = cashier.photo_path
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            cashier_photo.setImageBitmap(myBitmap)
+
+            btn_add.setImageResource(R.drawable.icon_edit)
+            cv_btn_delete.visibility = View.VISIBLE
+        }
+
+        input_name.setText(cashier.name)
+
+        if (cashier.position.equals("") || cashier.position ==  null){
+        } else{
+            input_position.setText(cashier.position)
+        }
+
+        if (cashier.contact.equals("") || cashier.contact ==  null){
+
+        } else{
+            input_contact.setText(cashier.contact)
+        }
 
     }
 
@@ -219,7 +256,7 @@ class AddingCashierActivity : AppCompatActivity() {
             .mode(ImagePicker.Mode.GALLERY)
             .allowMultipleImages(true)
             .compressLevel(ImagePicker.ComperesLevel.MEDIUM)
-            .directory(Environment.getExternalStorageDirectory().toString() + "/Chaching/Cashier/")
+            .directory(Environment.getExternalStorageDirectory().toString() + "/Kaching/Cashier/")
             .extension(ImagePicker.Extension.JPG)
             .allowOnlineImages(true)
             .scale(600, 600)

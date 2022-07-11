@@ -28,13 +28,22 @@
         android:id="@+id/txt_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="App\nName"
+        android:layout_below="@id/center"
+        android:layout_centerHorizontal="true"
+        android:text="Kaching"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cashier App"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/center"/>
+        android:layout_below="@id/txt_app_name"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CashierDetailActivity">
+
+    <TextView
+        style="@style/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_cashier_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+        android:layout_below="@id/btn_back"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/cashier_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorGray"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/cv_cashier_photo"/>
+
+    <TextView
+        android:id="@+id/txt_cashier_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/txt_name"
+        android:layout_alignRight="@id/txt_name"
+        android:layout_below="@id/txt_name"
+        android:text="Cashier Name"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Position/Job"
+        android:layout_alignRight="@id/txt_name"
+        android:layout_alignLeft="@id/txt_name"
+        android:layout_below="@id/txt_cashier_name"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/txt_cashier_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/txt_name"
+        android:layout_alignRight="@id/txt_name"
+        android:layout_below="@id/txt_position"
+        android:text="Cashier Position"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        android:layout_alignRight="@id/txt_name"
+        android:layout_alignLeft="@id/txt_name"
+        android:layout_below="@id/txt_cashier_position"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/txt_cashier_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/txt_name"
+        android:layout_alignRight="@id/txt_name"
+        android:layout_below="@id/txt_contact"
+        android:text="Cashier Contact"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_cashier_contact"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_btn_edit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="5dp"
+            android:elevation="10dp"
+            android:backgroundTint="@color/primary_dark">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_edit"
+                android:padding="10dp"
+                app:tint="@color/white"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/cv_btn_edit"
+            android:layout_alignRight="@id/cv_btn_edit"
+            android:text="Edit"
+            android:layout_below="@id/cv_btn_edit"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textAlignment="center"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_btn_delete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="5dp"
+            android:elevation="10dp"
+            android:backgroundTint="@color/redFailed"
+            android:layout_toRightOf="@id/cv_btn_edit"
+            android:layout_marginLeft="30dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_delete"
+                android:padding="10dp"
+                app:tint="@color/white"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/cv_btn_delete"
+            android:layout_alignRight="@id/cv_btn_delete"
+            android:text="Delete"
+            android:layout_below="@id/cv_btn_delete"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textAlignment="center"/>
+    </RelativeLayout>
+
+</RelativeLayout>

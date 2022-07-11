@@ -58,6 +58,10 @@ class MenuListActivity : AppCompatActivity(){
             intent.putParcelableArrayListExtra("selectedProducts", selectedProducts)
             startActivity(intent)
         }
+
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun loadProductList() {

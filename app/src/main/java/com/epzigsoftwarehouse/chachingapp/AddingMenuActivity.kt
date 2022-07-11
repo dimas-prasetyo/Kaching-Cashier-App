@@ -56,6 +56,7 @@ class AddingMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_menu)
 
+        cv_button_2.visibility = View.GONE
         try {
             var product_id = intent.getStringExtra("product_id").toString().toInt()
 
@@ -119,7 +120,6 @@ class AddingMenuActivity : AppCompatActivity() {
         cv_button_2.setOnClickListener {
             deleteProductImage()
         }
-        cv_button_2.visibility = View.GONE
 
         cv_info_proportion.setOnClickListener {
             showInfoProportion()
@@ -234,6 +234,9 @@ class AddingMenuActivity : AppCompatActivity() {
             imagePath = product.photo_path
             val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
             product_photo.setImageBitmap(myBitmap)
+
+            button_1.setImageResource(R.drawable.icon_edit)
+            cv_button_2.visibility = View.VISIBLE
         }
     }
 
@@ -401,7 +404,7 @@ class AddingMenuActivity : AppCompatActivity() {
             .mode(ImagePicker.Mode.GALLERY)
             .allowMultipleImages(true)
             .compressLevel(ImagePicker.ComperesLevel.MEDIUM)
-            .directory(Environment.getExternalStorageDirectory().toString() + "/Chaching/Images/")
+            .directory(Environment.getExternalStorageDirectory().toString() + "/Kaching/Images/")
             .extension(ImagePicker.Extension.JPG)
             .allowOnlineImages(true)
             .scale(600, 600)

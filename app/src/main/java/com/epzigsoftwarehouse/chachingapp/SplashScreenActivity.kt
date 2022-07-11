@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 
 class SplashScreenActivity : AppCompatActivity() {
     lateinit var temp_setting: SharedPreferences
@@ -15,6 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         temp_setting = getSharedPreferences("setting_info", Context.MODE_PRIVATE)
 
         try {

@@ -39,6 +39,10 @@ class CashierListActivity : AppCompatActivity() {
             loadCashierList()
             chechkActiveCashier(active_cashier)
         }
+
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun chechkActiveCashier(active_cashier: String) {

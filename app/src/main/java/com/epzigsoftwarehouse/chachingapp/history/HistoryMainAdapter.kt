@@ -38,7 +38,7 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                 var totalProduct = 0
                 for (i in 0..items.size-1) {
                     if (item.transaction_id.equals(items[i].transaction_id)) {
-                        totalPrice = totalPrice + items[i].price
+                        totalPrice = totalPrice + items[i].price * items[i].amount
                         totalProduct = totalProduct + 1
                     }
                 }
@@ -53,7 +53,7 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
             var totalProduct = 0
             for (i in 0..items.size-1){
                 if (item.transaction_id.equals(items[i].transaction_id)){
-                    totalPrice = totalPrice + items[i].price
+                    totalPrice = totalPrice + items[i].price * items[i].amount
                     totalProduct = totalProduct + 1
                 }
             }

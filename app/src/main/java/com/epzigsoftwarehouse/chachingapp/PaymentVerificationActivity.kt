@@ -74,7 +74,6 @@ class PaymentVerificationActivity : AppCompatActivity() {
             val status = databaseHandler.addHistory(History(0, transactionId, currentDate, currentTimes, selectedProducts[i].id, selectedProducts[i].name, selectedProducts[i].price, selectedProducts[i].chose_amount))
             if (status > -1) {
                 //showSuccessDialog()
-                println("ini status berhasil: " + status)
                 statusSaveHistyory.add(status)
             } else {
                 //showFailedDialog()

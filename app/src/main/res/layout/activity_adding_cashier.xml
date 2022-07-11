@@ -167,6 +167,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
+                    android:inputType="textPersonName"
                     android:hint="Input Name"
                     android:textSize="20sp" />
 
@@ -207,6 +208,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="Input Position or Job"
+                    android:inputType="textPersonName"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -245,6 +247,7 @@
                     android:background="@null"
                     android:backgroundTint="@color/primary_dark"
                     android:hint="Input Contact"
+                    android:inputType="textPersonName"
                     android:textSize="20sp" />
 
             </com.google.android.material.card.MaterialCardView>

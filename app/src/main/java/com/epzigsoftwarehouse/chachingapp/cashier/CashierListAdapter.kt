@@ -1,6 +1,7 @@
 package com.epzigsoftwarehouse.chachingapp.cashier
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.epzigsoftwarehouse.chachingapp.CashierDetailActivity
 import com.epzigsoftwarehouse.chachingapp.R
 import kotlinx.android.synthetic.main.layout_cashier.view.*
 import java.io.File
@@ -49,6 +51,13 @@ class CashierListAdapter (val context: Context?, val items: ArrayList<Cashier>) 
             temp_setting.edit().putString("active_cashier", item.id.toString()).apply()
             onActiveCashierClick?.invoke(item.id.toString())
         }
+
+        holder.area_click.setOnClickListener {
+            val productDetailIntent = Intent(context, CashierDetailActivity::class.java)
+            productDetailIntent.putExtra("cashier_id", item.id.toString())
+
+            context?.startActivity(productDetailIntent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -67,6 +76,7 @@ class CashierListAdapter (val context: Context?, val items: ArrayList<Cashier>) 
 
         val btn_choose_cashier = view.btn_choose_cashier
         val txt_active_cashier = view.txt_active_cashier
+        val area_click = view.area_click
 
     }
 
