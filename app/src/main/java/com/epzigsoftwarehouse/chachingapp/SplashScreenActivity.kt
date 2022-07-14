@@ -5,9 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import java.io.File
 
 class SplashScreenActivity : AppCompatActivity() {
     lateinit var temp_setting: SharedPreferences
@@ -42,4 +44,15 @@ class SplashScreenActivity : AppCompatActivity() {
             finish()
         }, 2000)
     }
+
+    /*private fun createAppFolder() {
+        val cashierPhotoFolder = File(Environment.getExternalStorageDirectory().path + "/Kaching/Cashier")
+        cashierPhotoFolder.mkdirs()
+
+        val productPhotoFolder = File(Environment.getExternalStorageDirectory().path + "/Kaching/Cashier")
+        productPhotoFolder.mkdirs()
+
+        val storePhotoFolder = File(Environment.getExternalStorageDirectory().path + "/Kaching/Store")
+        storePhotoFolder.mkdirs()
+    }*/
 }

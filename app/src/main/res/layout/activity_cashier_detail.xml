@@ -39,7 +39,7 @@
             android:id="@+id/cashier_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorGray"
+            android:src="@drawable/no_photo_cashier"
             android:scaleType="centerCrop"/>
 
     </com.google.android.material.card.MaterialCardView>

@@ -1,9 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        style="@style/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back"
+        android:translationZ="90dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_back">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_logo_store"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:elevation="10dp"
+                android:layout_centerHorizontal="true"
+                app:cardCornerRadius="5dp"
+                app:strokeColor="@color/primary_dark"
+                android:layout_marginTop="10dp"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:id="@+id/logo_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/no_photo_product"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_btn_camera"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="10dp"
+                android:backgroundTint="@color/primary_dark"
+                android:layout_alignBottom="@id/cv_logo_store"
+                android:layout_alignRight="@id/cv_logo_store"
+                android:layout_marginBottom="-10dp"
+                android:layout_marginRight="-10dp">
+
+                <ImageView
+                    android:id="@+id/btn_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:src="@drawable/icon_camera"
+                    app:tint="@color/white"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txt_store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_btn_camera"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Store Name"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/underline_store_name"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGrayDark"
+                android:layout_below="@id/txt_store_name"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_alignLeft="@id/txt_store_name"/>
+
+            <ImageView
+                android:id="@+id/btn_change_name"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignBottom="@id/txt_store_name"
+                android:layout_marginBottom="-10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/txt_store_name"
+                android:padding="10dp"
+                android:src="@drawable/icon_edit"
+                app:tint="@color/primary_dark" />
+
+            <RelativeLayout
+                android:id="@+id/layout_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/underline_store_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="50dp">
+
+                <ImageView
+                    android:id="@+id/icon_language"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="15dp"
+                    android:src="@drawable/icon_language" />
+
+                <TextView
+                    android:id="@+id/txt_title_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/icon_language"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/icon_language"
+                    android:text="Language"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_title_language"
+                    android:layout_alignRight="@id/txt_title_language"
+                    android:layout_below="@id/txt_title_language"
+                    android:text="English" />
+
+                <TextView
+                    android:id="@+id/underline_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/icon_language"
+                    android:background="@color/colorGrayDark" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_currency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/layout_language"
+                android:layout_alignRight="@id/layout_language"
+                android:layout_below="@id/layout_language">
+
+                <ImageView
+                    android:id="@+id/icon_currency"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="15dp"
+                    android:src="@drawable/icon_currency" />
+
+                <TextView
+                    android:id="@+id/txt_title_currency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/icon_currency"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@id/icon_currency"
+                    android:text="Currency"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_currency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_title_currency"
+                    android:layout_alignRight="@id/txt_title_currency"
+                    android:layout_below="@id/txt_title_currency"
+                    android:text="dollar" />
+
+                <TextView
+                    android:id="@+id/underline_currency"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/icon_currency"
+                    android:background="@color/colorGrayDark" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

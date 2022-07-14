@@ -210,5 +210,7 @@ class MenuListActivity : AppCompatActivity(){
     override fun onResume() {
         //refreshAll()
         super.onResume()
+        loadCategory()
+        loadProductBy(categoryActive, "")
     }
 }

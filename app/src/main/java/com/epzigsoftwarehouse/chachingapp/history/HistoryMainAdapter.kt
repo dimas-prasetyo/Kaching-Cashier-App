@@ -1,6 +1,7 @@
 package com.epzigsoftwarehouse.chachingapp.history
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +14,22 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HistoryMainAdapter (val context: Context?, val items: List<History>) : RecyclerView.Adapter<HistoryMainAdapter.ViewHolder>() {
+    lateinit var temp_setting: SharedPreferences
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryMainAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_main_history_list, parent, false))
     }
 
     override fun onBindViewHolder(holder: HistoryMainAdapter.ViewHolder, position: Int) {
+        temp_setting = context?.getSharedPreferences("setting_info", Context.MODE_PRIVATE)!!
+        val usedCurrency = temp_setting.getString("currency", "").toString()
         val item = items.get(position)
 
+        if (usedCurrency.equals("dollar")){
+            holder.txt_symbol_currency.text = "$"
+        } else if (usedCurrency.equals("rupiah")){
+            holder.txt_symbol_currency.text = "Rp."
+        }
         val dateFormated = formatDate(item.date, "EEE, dd MMMM yyyy")
         val timesFormated = formatTime(item.time, "HH:mm:ss")
 
@@ -43,7 +52,8 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                     }
                 }
                 holder.txt_product.text = totalProduct.toString() + " product"
-                holder.txt_time.text = timesFormated
+                //holder.txt_time.text = timesFormated
+                holder.txt_time.text = item.time
                 holder.txt_total_price.text = totalPrice.toString()
             }
         } else {
@@ -58,8 +68,9 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                 }
             }
             holder.txt_product.text = totalProduct.toString() + " product"
-            holder.txt_time.text = timesFormated
+            //holder.txt_time.text = timesFormated
             holder.txt_total_price.text = totalPrice.toString()
+            holder.txt_time.text = item.time
             /*if (item.transaction_id.equals(items[position + 1].transaction_id)){
                 println("Ya ada duplicate")
                 holder.cv_history.visibility = View.GONE
@@ -118,6 +129,7 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
         val txt_time = view.txt_time
         val txt_product = view.txt_product
         val txt_total_price = view.txt_total_price
+        val txt_symbol_currency = view.txt_symbol_currency
         //val rv_history_list = view.rv_history_list
     }
 

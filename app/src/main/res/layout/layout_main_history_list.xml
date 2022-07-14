@@ -35,6 +35,7 @@
                 android:text="145"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,6 +47,7 @@
                 android:padding="5dp"
                 android:text="No"
                 android:textColor="@color/black"
+                android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -60,18 +62,34 @@
                 android:padding="5dp"
                 android:text="123456789"
                 android:textColor="@color/white"
+                android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_total_price"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@color/primary_light"
-                android:padding="5dp"
+                android:gravity="center_vertical|start"
+                android:paddingBottom="5dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
                 android:text="30.000"
-                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_symbol_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@id/txt_total_price"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="$"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />

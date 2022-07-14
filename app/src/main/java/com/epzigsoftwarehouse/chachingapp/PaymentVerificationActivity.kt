@@ -52,7 +52,6 @@ class PaymentVerificationActivity : AppCompatActivity() {
         val timesFormated = formatTime(currentTimes, "HH:mm:ss")
 
         txt_time.text = timesFormated + " - " + dateFormated
-        println("Tes: " + currentDate + currentTimes + "-" + totalPrice)
 
         btn_done.setOnClickListener {
             addToHistory()
@@ -64,6 +63,8 @@ class PaymentVerificationActivity : AppCompatActivity() {
     }
 
     private fun addToHistory() {
+        /*println("Waktu: " + currentTimes)
+        Toast.makeText(this, "Waktu: " + currentTimes, Toast.LENGTH_LONG).show()*/
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         val transactionId = currentDate + "/" + currentTimes + "/" + totalPrice
 
@@ -90,6 +91,7 @@ class PaymentVerificationActivity : AppCompatActivity() {
         for (i in 0..selectedProducts.size-1){
             var tempTotal = selectedProducts[i].chose_amount * selectedProducts[i].price
             totalPrice = totalPrice + tempTotal
+            totalPrice = Math.round(totalPrice * 100.0) / 100.0
         }
 
         total_price.text = totalPrice.toString()

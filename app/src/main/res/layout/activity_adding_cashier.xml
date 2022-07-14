@@ -125,7 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:src="@color/colorGray" />
+                            android:src="@drawable/no_photo_cashier" />
 
                     </com.google.android.material.card.MaterialCardView>
 

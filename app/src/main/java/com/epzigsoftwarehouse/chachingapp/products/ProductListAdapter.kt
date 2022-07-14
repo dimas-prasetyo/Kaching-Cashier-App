@@ -2,6 +2,7 @@ package com.epzigsoftwarehouse.chachingapp.products
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.epzigsoftwarehouse.chachingapp.R
 import kotlinx.android.synthetic.main.layout_menu.view.*
 import java.io.File
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+    lateinit var temp_setting: SharedPreferences
     var onItemClick: ((Product) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,6 +28,9 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        temp_setting = context?.getSharedPreferences("setting_info", Context.MODE_PRIVATE)!!
+        val usedCurrency = temp_setting.getString("currency", "").toString()
+
         val item = items.get(position)
 
         if (item.chose_amount > 0){
@@ -33,11 +42,42 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
             holder.menu_name.setTextColor(ContextCompat.getColor(context, R.color.white))
             holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.white))
             holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.menu_currency.setTextColor(ContextCompat.getColor(context, R.color.white))
         }
 
         holder.menu_name.text = item.name
-        holder.menu_proportions.text = item.proportion.toString() + " " + item.unit + " x " + item.amount.toString()
-        holder.menu_price.text = item.price.toString()
+
+        if (item.unit.equals("") || item.unit == null){
+            holder.menu_proportions.visibility = View.GONE
+        } else {
+            holder.menu_proportions.text = item.proportion.toString() + " " + item.unit + " x " + item.amount.toString()
+        }
+
+        if (usedCurrency.equals("dollar")){
+            holder.menu_currency.text = "$"
+            holder.menu_price.text = item.price.toString()
+        } else if (usedCurrency.equals("rupiah")){
+            holder.menu_currency.text = "Rp."
+            val tempPrice = item.price.toInt()
+
+            var originalString = tempPrice.toString()
+            val longval: Long
+
+            val re = Regex("[^A-Za-z0-9 ]")
+            originalString = re.replace(originalString, "")
+
+            longval = originalString.toLong()
+
+            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+            formatter.applyPattern("#,###,###,###")
+            var formattedString = formatter.format(longval)
+
+            if (formattedString.contains(",")) {
+                formattedString = formattedString.replace(",".toRegex(), ".")
+            }
+
+            holder.menu_price.text = formattedString
+        }
 
         val imgFile = File(item.photo_path)
         if (imgFile.exists()) {
@@ -67,6 +107,7 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
                     holder.menu_name.setTextColor(ContextCompat.getColor(context, R.color.primaryTextBlack))
                     holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.primaryTextBlack))
                     holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.black))
+                    holder.menu_currency.setTextColor(ContextCompat.getColor(context, R.color.black))
 
                 }
                 onItemClick?.invoke(item)
@@ -88,6 +129,7 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
             holder.menu_name.setTextColor(ContextCompat.getColor(context, R.color.white))
             holder.menu_proportions.setTextColor(ContextCompat.getColor(context, R.color.white))
             holder.menu_price.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.menu_currency.setTextColor(ContextCompat.getColor(context, R.color.white))
 
             onItemClick?.invoke(item)
 
@@ -109,6 +151,7 @@ class ProductListAdapter (val context: Context?, val items: ArrayList<Product>) 
         val image_menu = view.image_menu
         val menu_proportions = view.menu_proportions
         val menu_price = view.menu_price
+        val menu_currency = view.menu_currency
 
         val layout_amount = view.layout_amount
 

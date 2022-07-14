@@ -268,7 +268,7 @@ class MenuEditableActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             infoDialogBox.dismiss()
-            refreshAll()
+            loadProductList()
         }, 2000)
     }
 
@@ -301,6 +301,7 @@ class MenuEditableActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             infoDialogBox.dismiss()
+            loadProductList()
         }, 2000)
     }
 
@@ -309,7 +310,7 @@ class MenuEditableActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        refreshAll()
         super.onResume()
+        loadProductList()
     }
 }

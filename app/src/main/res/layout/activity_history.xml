@@ -98,14 +98,14 @@
 
         <TextView
             android:id="@+id/txt_price"
-            android:layout_width="98dp"
+            android:layout_width="118dp"
             android:layout_height="wrap_content"
-            android:text="Price"
-            android:textColor="@color/primary_dark"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/line_5"
             android:padding="5dp"
+            android:text="Price"
             android:textAlignment="center"
-            android:layout_toLeftOf="@id/line_5"/>
+            android:textColor="@color/primary_dark" />
 
         <TextView
             android:id="@+id/line_5"

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.epzigsoftwarehouse.chachingapp">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_kaching"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_kaching"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChaChingApp">
+        android:theme="@style/Theme.ChaChingApp"
+        android:requestLegacyExternalStorage="true">
+        <activity
+            android:name=".ImagePreviewActivity"
+            android:exported="false" />
         <activity
             android:name=".CashierDetailActivity"
             android:exported="false" />
@@ -55,10 +60,11 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

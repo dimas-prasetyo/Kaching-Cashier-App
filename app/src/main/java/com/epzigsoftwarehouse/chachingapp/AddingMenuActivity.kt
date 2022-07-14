@@ -19,6 +19,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -57,6 +58,11 @@ class AddingMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_adding_menu)
 
         cv_button_2.visibility = View.GONE
+
+        temp_setting = getSharedPreferences("setting_info", Context.MODE_PRIVATE)
+        currency = temp_setting.getString("currency", "").toString()
+        Toast.makeText(this, "Ini currency: " + currency, Toast.LENGTH_LONG).show()
+
         try {
             var product_id = intent.getStringExtra("product_id").toString().toInt()
 
@@ -69,11 +75,10 @@ class AddingMenuActivity : AppCompatActivity() {
 
         }
 
-        temp_setting = getSharedPreferences("setting_info", Context.MODE_PRIVATE)
-        currency = temp_setting.getString("currency", "").toString()
-
         if (currency.equals("dollar")){
             txt_currency.text = "$"
+        } else if (currency.equals("rupiah")){
+            txt_currency.text = "Rp."
         }
 
         btn_done.setOnClickListener {
@@ -137,32 +142,33 @@ class AddingMenuActivity : AppCompatActivity() {
             val i = Intent(this, BarcodeScannerActivity::class.java)
             startActivityForResult(i, 100)
         }
-/*
+
         input_price.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 input_price.removeTextChangedListener(this)
+                if (currency.equals("rupiah")){
+                    try {
+                        var originalString = s.toString()
+                        val longval: Long
 
-                try {
-                    var originalString = s.toString()
-                    val longval: Long
+                        val re = Regex("[^A-Za-z0-9 ]")
+                        originalString = re.replace(originalString, "")
 
-                    val re = Regex("[^A-Za-z0-9 ]")
-                    originalString = re.replace(originalString, "")
+                        longval = originalString.toLong()
 
-                    longval = originalString.toLong()
+                        val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+                        formatter.applyPattern("#,###,###,###")
+                        var formattedString = formatter.format(longval)
 
-                    val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-                    formatter.applyPattern("#,###,###,###")
-                    var formattedString = formatter.format(longval)
-
-                    if (formattedString.contains(",")) {
-                        formattedString = formattedString.replace(",".toRegex(), ".")
+                        if (formattedString.contains(",")) {
+                            formattedString = formattedString.replace(",".toRegex(), ".")
+                        }
+                        //setting text after format to EditText
+                        input_price.setText(formattedString)
+                        input_price.setSelection(input_price.getText().length)
+                    } catch (nfe: NumberFormatException) {
+                        nfe.printStackTrace()
                     }
-                    //setting text after format to EditText
-                    input_price.setText(formattedString)
-                    input_price.setSelection(input_price.getText().length)
-                } catch (nfe: NumberFormatException) {
-                    nfe.printStackTrace()
                 }
 
                 input_price.addTextChangedListener(this)
@@ -176,33 +182,35 @@ class AddingMenuActivity : AppCompatActivity() {
             }
         })
 
-        input_proportion.addTextChangedListener(object : TextWatcher {
+        /*input_proportion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 input_proportion.removeTextChangedListener(this)
 
-                try {
-                    var originalString = s.toString()
-                    val longval: Long
+                if (currency.equals("rupiah")){
+                    try {
+                        var originalString = s.toString()
+                        val longval: Long
 
-                    val re = Regex("[^A-Za-z0-9 ]")
-                    originalString = re.replace(originalString, "")
+                        val re = Regex("[^A-Za-z0-9 ]")
+                        originalString = re.replace(originalString, "")
 
-                    longval = originalString.toLong()
+                        longval = originalString.toLong()
 
-                    val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-                    formatter.applyPattern("#,###,###,###")
-                    var formattedString = formatter.format(longval)
+                        val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+                        formatter.applyPattern("#,###,###,###")
+                        var formattedString = formatter.format(longval)
 
-                    if (formattedString.contains(",")) {
-                        formattedString = formattedString.replace(",".toRegex(), ".")
+                        if (formattedString.contains(",")) {
+                            formattedString = formattedString.replace(",".toRegex(), ".")
+                        }
+                        //setting text after format to EditText
+                        input_proportion.setText(formattedString)
+                        input_proportion.setSelection(input_proportion.getText().length)
+                    } catch (nfe: NumberFormatException) {
+                        nfe.printStackTrace()
                     }
-                    //setting text after format to EditText
-                    input_proportion.setText(formattedString)
-                    input_proportion.setSelection(input_proportion.getText().length)
-                } catch (nfe: NumberFormatException) {
-                    nfe.printStackTrace()
-                }
 
+                }
                 input_proportion.addTextChangedListener(this)
             }
 
@@ -212,8 +220,7 @@ class AddingMenuActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
             }
-        })
-        */
+        })*/
     }
 
     private fun loadMenuDetail(productId: Int) {
@@ -223,11 +230,36 @@ class AddingMenuActivity : AppCompatActivity() {
 
         input_category.setText(product.category)
         input_name.setText(product.name)
-        input_price.setText(product.price.toString())
         input_proportion.setText(product.proportion.toString())
         input_unit.setText(product.unit)
         input_amount.setText(product.amount.toString())
         input_barcode.setText(product.barcode)
+
+        if (currency.equals("dollar")){
+            input_price.setText(product.price.toString())
+        } else if (currency.equals("rupiah")){
+            /*val tempPrice = product.price.toInt()
+
+            var originalString = tempPrice.toString()
+            val longval: Long
+            println("Disini 1: " + product.price.toInt())
+            println("Disini 2: " + tempPrice)
+            println("Disini 3: " + originalString)
+
+            val re = Regex("[^A-Za-z0-9 ]")
+            originalString = re.replace(originalString, "")
+
+            longval = originalString.toLong()
+
+            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
+            formatter.applyPattern("#,###,###,###")
+            var formattedString = formatter.format(longval)
+
+            if (formattedString.contains(",")) {
+                formattedString = formattedString.replace(",".toRegex(), ".")
+            }*/
+            input_price.setText(product.price.toString())
+        }
 
         val imgFile = File(product.photo_path)
         if (imgFile.exists()) {
@@ -404,7 +436,7 @@ class AddingMenuActivity : AppCompatActivity() {
             .mode(ImagePicker.Mode.GALLERY)
             .allowMultipleImages(true)
             .compressLevel(ImagePicker.ComperesLevel.MEDIUM)
-            .directory(Environment.getExternalStorageDirectory().toString() + "/Kaching/Images/")
+            .directory(Environment.getExternalStorageDirectory().toString() + "/Kaching/Product/")
             .extension(ImagePicker.Extension.JPG)
             .allowOnlineImages(true)
             .scale(600, 600)
@@ -427,7 +459,13 @@ class AddingMenuActivity : AppCompatActivity() {
             }  else {
                 category_input = input_category.getText().toString()
                 name_input = input_name.getText().toString()
-                price_input = input_price.getText().toString().toDouble()
+
+                if (currency.equals("rupiah")){
+                    val tempPrice = input_price.getText().toString().replace(".", "")
+                    price_input = tempPrice.toDouble()
+                } else {
+                    price_input = input_price.getText().toString().toDouble()
+                }
 
                 if (input_proportion.getText().toString() == "" || input_proportion.getText() == null){
                     proportion_input = 0.0
