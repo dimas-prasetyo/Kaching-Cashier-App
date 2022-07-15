@@ -124,4 +124,16 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 
+
+    <TextView
+        android:id="@+id/txt_no_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No transaction added yet"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+
+
+
 </RelativeLayout>

@@ -13,13 +13,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
+import com.epzigsoftwarehouse.chachingapp.history.History
 import kotlinx.android.synthetic.main.activity_setting.*
 import net.alhazmy13.mediapicker.FileProcessing.getPath
 import net.alhazmy13.mediapicker.Image.ImagePicker
@@ -67,9 +71,16 @@ class SettingActivity : AppCompatActivity() {
             showChangeTaxDialogBox()
         }
 
+        layout_clear_history.setOnClickListener {
+            showDeleteDialogBox()
+        }
+
         btn_change_name.setOnClickListener {
             showChangeNameDialogBox()
         }
+    }
+
+    private fun deleteAllTransaction() {
     }
 
     private fun loadDetailStore() {
@@ -283,6 +294,113 @@ class SettingActivity : AppCompatActivity() {
             loadDetailStore()
         }
 
+    }
+    private fun showDeleteDialogBox() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_confirmation, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        val btn_opt_1 = promptView.findViewById<TextView>(R.id.btn_opt_1) as TextView
+        val btn_opt_2 = promptView.findViewById<TextView>(R.id.btn_opt_2) as TextView
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.redFailed))
+        icon_dialog.setImageResource(R.drawable.icon_delete)
+        txt_info.text = "Do you want to remove all transaction?"
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        btn_opt_1.setOnClickListener {
+            val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+            val empList: ArrayList<History> = databaseHandler.viewAllHistory()
+
+            for (i in 0..empList.size-1){
+                val deleteTransaction = databaseHandler.deleteHistory(empList[i].id)
+            }
+
+            infoDialogBox.dismiss()
+        }
+
+        btn_opt_2.setOnClickListener {
+            infoDialogBox.dismiss()
+        }
+
+    }
+
+    private fun showSuccessDelete() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_info_dialog_box, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setCancelable(false)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.greenSuccess))
+        icon_dialog.setImageResource(R.drawable.icon_done)
+
+        txt_info.text = "Successfully delete all transaction"
+
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        // create an loading dialog
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        Handler().postDelayed({
+            infoDialogBox.dismiss()
+
+        }, 2000)
+    }
+
+    private fun showFailedDelete() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_info_dialog_box, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setCancelable(false)
+        layoutShowInfo.setView(promptView)
+
+        val txt_info = promptView.findViewById<TextView>(R.id.txt_main_text) as TextView
+        val icon_dialog = promptView.findViewById<ImageView>(R.id.icon_dialog) as ImageView
+        val bg_dialog_box = promptView.findViewById<RelativeLayout>(R.id.bg_dialog_box) as RelativeLayout
+
+        bg_dialog_box.setBackgroundColor(ContextCompat.getColor(this, R.color.redFailed))
+        icon_dialog.setImageResource(R.drawable.icon_failed)
+
+        txt_info.text = "Failed to delete transaction"
+
+        // create an alert dialog
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        // create an loading dialog
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        Handler().postDelayed({
+            infoDialogBox.dismiss()
+        }, 2000)
     }
 
     override fun onResume() {

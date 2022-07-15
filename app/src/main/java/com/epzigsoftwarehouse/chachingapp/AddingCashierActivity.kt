@@ -141,8 +141,9 @@ class AddingCashierActivity : AppCompatActivity() {
 
     private fun checkForm(): Boolean {
         if (1 == 1){
-            if (input_name.text.equals("") || input_name.text == null){
-                input_name.setError("Please input email")
+            if (input_name.getText().toString().equals("") || input_name.text == null){
+                showFailedDialog()
+                input_name.setError("Please input cashier name")
                 return false
             } else {
                 name_input = input_name.getText().toString()

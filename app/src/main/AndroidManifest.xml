@@ -7,10 +7,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon_kaching"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/icon_kaching"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChaChingApp"
-        android:requestLegacyExternalStorage="true">
+        android:theme="@style/Theme.ChaChingApp">
+        <activity
+            android:name=".HistoryDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ImagePreviewActivity"
             android:exported="false" />
@@ -60,11 +63,12 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

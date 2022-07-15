@@ -61,7 +61,6 @@ class AddingMenuActivity : AppCompatActivity() {
 
         temp_setting = getSharedPreferences("setting_info", Context.MODE_PRIVATE)
         currency = temp_setting.getString("currency", "").toString()
-        Toast.makeText(this, "Ini currency: " + currency, Toast.LENGTH_LONG).show()
 
         try {
             var product_id = intent.getStringExtra("product_id").toString().toInt()
@@ -182,45 +181,6 @@ class AddingMenuActivity : AppCompatActivity() {
             }
         })
 
-        /*input_proportion.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                input_proportion.removeTextChangedListener(this)
-
-                if (currency.equals("rupiah")){
-                    try {
-                        var originalString = s.toString()
-                        val longval: Long
-
-                        val re = Regex("[^A-Za-z0-9 ]")
-                        originalString = re.replace(originalString, "")
-
-                        longval = originalString.toLong()
-
-                        val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-                        formatter.applyPattern("#,###,###,###")
-                        var formattedString = formatter.format(longval)
-
-                        if (formattedString.contains(",")) {
-                            formattedString = formattedString.replace(",".toRegex(), ".")
-                        }
-                        //setting text after format to EditText
-                        input_proportion.setText(formattedString)
-                        input_proportion.setSelection(input_proportion.getText().length)
-                    } catch (nfe: NumberFormatException) {
-                        nfe.printStackTrace()
-                    }
-
-                }
-                input_proportion.addTextChangedListener(this)
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-            }
-        })*/
     }
 
     private fun loadMenuDetail(productId: Int) {
@@ -238,26 +198,6 @@ class AddingMenuActivity : AppCompatActivity() {
         if (currency.equals("dollar")){
             input_price.setText(product.price.toString())
         } else if (currency.equals("rupiah")){
-            /*val tempPrice = product.price.toInt()
-
-            var originalString = tempPrice.toString()
-            val longval: Long
-            println("Disini 1: " + product.price.toInt())
-            println("Disini 2: " + tempPrice)
-            println("Disini 3: " + originalString)
-
-            val re = Regex("[^A-Za-z0-9 ]")
-            originalString = re.replace(originalString, "")
-
-            longval = originalString.toLong()
-
-            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-            formatter.applyPattern("#,###,###,###")
-            var formattedString = formatter.format(longval)
-
-            if (formattedString.contains(",")) {
-                formattedString = formattedString.replace(",".toRegex(), ".")
-            }*/
             input_price.setText(product.price.toString())
         }
 
@@ -447,14 +387,17 @@ class AddingMenuActivity : AppCompatActivity() {
 
     private fun checkForm(): Boolean {
         if (1 == 1){
-            if (input_category.text.equals("") || input_category.text == null){
-                input_category.setError("Please input email")
+            if (input_category.getText().toString().equals("") || input_category.getText() == null){
+                showFailedDialog()
+                input_category.setError("Please input product category")
                 return false
-            } else if (input_name.text.equals("") || input_name.text == null){
-                input_name.setError("Please input correct email")
+            } else if (input_name.getText().toString().equals("") || input_name.getText() == null){
+                showFailedDialog()
+                input_name.setError("Please input product name")
                 return false
-            } else if (input_price.text.equals("") || input_price.text == null){
-                input_price.setError("Please input Password")
+            } else if (input_price.getText().toString().equals("") || input_price.getText() == null){
+                showFailedDialog()
+                input_price.setError("Please input product price")
                 return false
             }  else {
                 category_input = input_category.getText().toString()

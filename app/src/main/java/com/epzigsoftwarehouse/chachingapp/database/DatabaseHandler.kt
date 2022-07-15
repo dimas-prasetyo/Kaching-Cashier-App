@@ -49,9 +49,13 @@ class DatabaseHandler (context: Context?) :
         private val KEY_TRANSACTION_ID = "transaction_id"
         private val KEY_TRANSACTION_DATE = "date"
         private val KEY_TRANSACTION_TIME= "time"
+        private val KEY_TRANSACTION_CASHIER_ID= "cashier_id"
         private val KEY_TRANSACTION_PRODUCT_ID = "product_id"
         private val KEY_TRANSACTION_PRODUCT_NAME = "product_name"
         private val KEY_TRANSACTION_PRODUCT_PRICE = "price"
+        private val KEY_TRANSACTION_PRODUCT_TAX = "tax"
+        private val KEY_TRANSACTION_PRODUCT_TIP = "tip"
+        private val KEY_TRANSACTION_PRODUCT_CASH = "cash"
         private val KEY_TRANSACTION_PRODUCT_AMOUNT= "amount"
 
         // Table Setting
@@ -92,9 +96,13 @@ class DatabaseHandler (context: Context?) :
                 + KEY_TRANSACTION_ID + " TEXT,"
                 + KEY_TRANSACTION_DATE + " TEXT,"
                 + KEY_TRANSACTION_TIME + " TEXT,"
+                + KEY_TRANSACTION_CASHIER_ID + " INTEGER,"
                 + KEY_TRANSACTION_PRODUCT_ID + " INTEGER,"
                 + KEY_TRANSACTION_PRODUCT_NAME + " TEXT,"
                 + KEY_TRANSACTION_PRODUCT_PRICE + " DOUBLE,"
+                + KEY_TRANSACTION_PRODUCT_TAX + " DOUBLE,"
+                + KEY_TRANSACTION_PRODUCT_TIP + " DOUBLE,"
+                + KEY_TRANSACTION_PRODUCT_CASH + " DOUBLE,"
                 + KEY_TRANSACTION_PRODUCT_AMOUNT + " INTEGER" + ")")
 
 
@@ -359,9 +367,13 @@ class DatabaseHandler (context: Context?) :
         contentValues.put(KEY_TRANSACTION_ID, history.transaction_id)
         contentValues.put(KEY_TRANSACTION_DATE, history.date)
         contentValues.put(KEY_TRANSACTION_TIME, history.time)
+        contentValues.put(KEY_TRANSACTION_CASHIER_ID, history.cashier_id)
         contentValues.put(KEY_TRANSACTION_PRODUCT_ID, history.product_id)
         contentValues.put(KEY_TRANSACTION_PRODUCT_NAME, history.product_name)
         contentValues.put(KEY_TRANSACTION_PRODUCT_PRICE, history.price)
+        contentValues.put(KEY_TRANSACTION_PRODUCT_TAX, history.tax)
+        contentValues.put(KEY_TRANSACTION_PRODUCT_TIP, history.tip)
+        contentValues.put(KEY_TRANSACTION_PRODUCT_CASH, history.cash)
         contentValues.put(KEY_TRANSACTION_PRODUCT_AMOUNT, history.amount)
 
         val success = db.insert(TABLE_HISTORY, null, contentValues)
@@ -392,9 +404,13 @@ class DatabaseHandler (context: Context?) :
         var transaction_id: String
         var date: String
         var time: String
+        var cashier_id: Int
         var product_id: Int
         var product_name: String
         var price: Double
+        var tax: Double
+        var tip: Double
+        var cash: Double
         var amount: Int
 
         if (cursor.moveToFirst()) {
@@ -403,12 +419,16 @@ class DatabaseHandler (context: Context?) :
                 transaction_id = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_ID))
                 date = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_DATE))
                 time = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_TIME))
+                cashier_id = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_CASHIER_ID))
                 product_id = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_ID))
                 product_name = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_NAME))
                 price = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_PRICE))
+                tax = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TAX))
+                tip = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TIP))
+                cash = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_CASH))
                 amount = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_AMOUNT))
 
-                val emp = History(id = id, transaction_id = transaction_id, date = date, time = time, product_id = product_id, product_name = product_name, price = price, amount = amount)
+                val emp = History(id = id, transaction_id = transaction_id, date = date, time = time, cashier_id = cashier_id, product_id = product_id, product_name = product_name, price = price, tax = tax, tip = tip, cash = cash, amount = amount)
                 empList.add(emp)
 
             } while (cursor.moveToNext())
@@ -422,19 +442,76 @@ class DatabaseHandler (context: Context?) :
         values.put(KEY_TRANSACTION_ID, history.transaction_id)
         values.put(KEY_TRANSACTION_DATE, history.date)
         values.put(KEY_TRANSACTION_TIME, history.time)
+        values.put(KEY_TRANSACTION_CASHIER_ID, history.cashier_id)
         values.put(KEY_TRANSACTION_PRODUCT_ID, history.product_id)
         values.put(KEY_TRANSACTION_PRODUCT_NAME, history.product_name)
         values.put(KEY_TRANSACTION_PRODUCT_PRICE, history.price)
+        values.put(KEY_TRANSACTION_PRODUCT_TAX, history.tax)
+        values.put(KEY_TRANSACTION_PRODUCT_TIP, history.tip)
+        values.put(KEY_TRANSACTION_PRODUCT_CASH, history.cash)
         values.put(KEY_TRANSACTION_PRODUCT_AMOUNT, history.amount)
 
         val _success = db.update(TABLE_HISTORY, values, KEY_ID + "=?", arrayOf(history.id.toString())).toLong()
         db.close()
         return _success
     }
+    @SuppressLint("Range")
+    fun getHistoryDetailWhere(_id: String): ArrayList<History> {
+
+        val empList: ArrayList<History> = ArrayList<History>()
+        val selectQuery = "SELECT  * FROM $TABLE_HISTORY WHERE $KEY_TRANSACTION_ID == '$_id'"
+
+        val db = this.readableDatabase
+        // Cursor is used to read the record one by one. Add them to data model class.
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var id: Int
+        var transaction_id: String
+        var date: String
+        var time: String
+        var cashier_id: Int
+        var product_id: Int
+        var product_name: String
+        var price: Double
+        var tax: Double
+        var tip: Double
+        var cash: Double
+        var amount: Int
+
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(cursor.getColumnIndex(KEY_HISTORY_ID))
+                transaction_id = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_ID))
+                date = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_DATE))
+                time = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_TIME))
+                cashier_id = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_CASHIER_ID))
+                product_id = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_ID))
+                product_name = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_NAME))
+                price = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_PRICE))
+                tax = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TAX))
+                tip = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TIP))
+                cash = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_CASH))
+                amount = cursor.getInt(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_AMOUNT))
+
+                val emp = History(id = id, transaction_id = transaction_id, date = date, time = time, cashier_id = cashier_id,product_id = product_id, product_name = product_name, price = price, tax = tax, tip = tip, cash = cash, amount = amount)
+                empList.add(emp)
+
+            } while (cursor.moveToNext())
+        }
+        return empList
+    }
 
     @SuppressLint("Range")
-    fun getHistoryDetail(_id: Int): History {
-        val history = History(0,"", "", "", 0, "", 0.0, 0)
+    fun getHistoryDetail(_id: String): History {
+        val history = History(0,"", "", "", 0, 0, "", 0.0, 0.0, 0.0, 0.0, 0)
         val db = writableDatabase
 
         val selectQuery = "SELECT  * FROM $TABLE_HISTORY WHERE $KEY_HISTORY_ID == $_id"
@@ -448,9 +525,13 @@ class DatabaseHandler (context: Context?) :
                     history.transaction_id = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_ID))
                     history.date = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_DATE))
                     history.time = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_TIME))
+                    history.cashier_id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_CASHIER_ID)))
                     history.product_id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_ID)))
                     history.product_name = cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_NAME))
                     history.price = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_PRICE))
+                    history.tax = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TAX))
+                    history.tip = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_TIP))
+                    history.cash = cursor.getDouble(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_CASH))
                     history.amount = Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_TRANSACTION_PRODUCT_AMOUNT)))
 
                 } while (cursor.moveToNext())

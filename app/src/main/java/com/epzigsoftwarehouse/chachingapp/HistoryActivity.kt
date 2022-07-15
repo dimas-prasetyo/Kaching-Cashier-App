@@ -2,6 +2,7 @@ package com.epzigsoftwarehouse.chachingapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
@@ -26,6 +27,12 @@ class HistoryActivity : AppCompatActivity() {
     private fun loadSelectedProducts() {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         val empList: ArrayList<History> = databaseHandler.viewAllHistory()
+
+        if (empList.size > 0){
+            txt_no_transaction.visibility = View.GONE
+        } else {
+            txt_no_transaction.visibility = View.VISIBLE
+        }
 
         val sortedList = empList.sortedByDescending { it.id }.toCollection(ArrayList())
         rv_main_history_list.hasFixedSize()

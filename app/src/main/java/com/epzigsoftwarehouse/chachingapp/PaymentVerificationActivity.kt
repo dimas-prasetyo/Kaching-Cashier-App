@@ -87,7 +87,7 @@ class PaymentVerificationActivity : AppCompatActivity() {
         statusSaveHistyory =  tempList
         var allStatus: Boolean = false
         for (i in 0..selectedProducts.size-1){
-            val status = databaseHandler.addHistory(History(0, transactionId, currentDate, currentTimes, selectedProducts[i].id, selectedProducts[i].name, selectedProducts[i].price, selectedProducts[i].chose_amount))
+            val status = databaseHandler.addHistory(History(0, transactionId, currentDate, currentTimes, activeCashier, selectedProducts[i].id, selectedProducts[i].name, selectedProducts[i].price, totalTaxPayment, tipPayment, cashPayment, selectedProducts[i].chose_amount))
             if (status > -1) {
                 //showSuccessDialog()
                 statusSaveHistyory.add(status)
@@ -133,8 +133,6 @@ class PaymentVerificationActivity : AppCompatActivity() {
 
         txt_tax.text = "Tax (" + storeTax.toString() + "%)"
         value_tax.text = totalTaxPayment.toString()
-
-
     }
 
     private fun loadActiveCashier() {

@@ -1,11 +1,13 @@
 package com.epzigsoftwarehouse.chachingapp.history
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.epzigsoftwarehouse.chachingapp.HistoryDetailActivity
 import com.epzigsoftwarehouse.chachingapp.R
 import kotlinx.android.synthetic.main.layout_main_history_list.view.*
 import java.text.ParseException
@@ -53,13 +55,9 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                     }
                 }
                 holder.txt_product.text = totalProduct.toString() + " product"
-                //holder.txt_time.text = timesFormated
                 holder.txt_time.text = item.time
                 holder.txt_total_price.text = totalPrice.toString()
             }
-
-            /*println("ukuran: " + items.size)
-            println("item: " + items)*/
             if (item.date.equals(items[position - 1].date)){
                 var tempList: ArrayList<String> = ArrayList()
                 for (i in 0..position-1){
@@ -70,38 +68,9 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                 var categoryList = tempList.distinct()
                 var textNumber = categoryList.size + 1
                 holder.txt_number.text = textNumber.toString()
-                /*if (item.time.equals(items[position - 1].time)){
-
-                } else {
-                    var tempList: ArrayList<String> = ArrayList()
-                    for (i in 0..position-1){
-                        if (item.date.equals(items[i].date)){
-                            tempList.add(items[i].transaction_id)
-                        }
-                    }
-                    var categoryList = tempList.distinct()
-                    var textNumber = categoryList.size + 1
-                    holder.txt_number.text = textNumber.toString()
-                }*/
             } else {
                 holder.txt_number.text = "1"
             }
-            /*var textNumber = 2
-            for (i in 0..position-1) {
-                println("item ini: " + item.time + ", produk: " + item.product_name)
-                println("item sebelumnya: " + items[position - 1].time + ", produk: " + items[position - 1].product_name)
-                if (item.date.equals(items[position - 1].date)){
-                    if (item.time.equals(items[position - 1].time)){
-
-                    } else {
-                        holder.txt_number.text = textNumber.toString()
-                        println("urutan: " + textNumber)
-                        textNumber = textNumber + 1
-                    }
-                } else {
-                    holder.txt_number.text = "1"
-                }
-            }*/
         } else {
             holder.txt_transaction_date.text = dateFormated
 
@@ -119,6 +88,13 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
             holder.txt_total_price.text = totalPrice.toString()
             holder.txt_time.text = item.time
             holder.txt_number.text = "1"
+        }
+
+        holder.cv_history.setOnClickListener {
+            val productDetailIntent = Intent(context, HistoryDetailActivity::class.java)
+            productDetailIntent.putExtra("product_id", item.transaction_id.toString())
+
+            context?.startActivity(productDetailIntent)
         }
     }
 

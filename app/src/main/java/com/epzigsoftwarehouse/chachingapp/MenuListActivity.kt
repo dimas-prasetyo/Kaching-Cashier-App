@@ -92,7 +92,6 @@ class MenuListActivity : AppCompatActivity(){
         rv_kategori_list.hasFixedSize()
         rv_kategori_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
         var tempList: ArrayList<String> = ArrayList()
         tempList.add(categoryActive)
         tempList.add("All")

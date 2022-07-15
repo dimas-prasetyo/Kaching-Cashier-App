@@ -253,6 +253,43 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_clear_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/layout_language"
+                android:layout_alignRight="@id/layout_language"
+                android:layout_below="@id/layout_tax">
+
+                <ImageView
+                    android:id="@+id/icon_clear_history"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="15dp"
+                    android:src="@drawable/icon_delete" />
+
+                <TextView
+                    android:id="@+id/txt_title_clear_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@id/icon_clear_history"
+                    android:text="Clear Transaction History"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/underline_clear_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/icon_clear_history"
+                    android:background="@color/colorGrayDark" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
 
