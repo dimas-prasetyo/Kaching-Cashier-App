@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon_done_dollar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_done"
+                    app:tint="@color/primary_dark" />
+
+                <TextView
+                    android:id="@+id/txt_dollar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/icon_done_dollar"
+                    android:layout_alignTop="@id/icon_done_dollar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toLeftOf="@id/icon_done_dollar"
+                    android:gravity="center_vertical"
+                    android:text="Dollar"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/icon_done_rupiah"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignRight="@id/icon_done_dollar"
+                    android:layout_below="@id/icon_done_dollar"
+                    android:layout_marginBottom="20dp"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_done"
+                    android:visibility="invisible"
+                    app:tint="@color/primary_dark" />
+
+                <TextView
+                    android:id="@+id/txt_rupiah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/icon_done_rupiah"
+                    android:layout_alignTop="@id/icon_done_rupiah"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toLeftOf="@id/icon_done_rupiah"
+                    android:gravity="center_vertical"
+                    android:text="Rupiah"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+</RelativeLayout>

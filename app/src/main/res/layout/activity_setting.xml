@@ -206,6 +206,53 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_tax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/layout_language"
+                android:layout_alignRight="@id/layout_language"
+                android:layout_below="@id/layout_currency">
+
+                <ImageView
+                    android:id="@+id/icon_tax"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="15dp"
+                    android:src="@drawable/icon_money" />
+
+                <TextView
+                    android:id="@+id/txt_title_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/icon_tax"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@id/icon_tax"
+                    android:text="Tax"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_title_tax"
+                    android:layout_alignRight="@id/txt_title_tax"
+                    android:layout_below="@id/txt_title_tax"
+                    android:text="10%" />
+
+                <TextView
+                    android:id="@+id/underline_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/icon_tax"
+                    android:background="@color/colorGrayDark" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
 

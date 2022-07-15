@@ -32,6 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 temp_setting.edit().putString("language", "english").apply()
                 temp_setting.edit().putString("currency", "dollar").apply()
                 temp_setting.edit().putString("active_cashier", "0").apply()
+                temp_setting.edit().putString("tax", "0").apply()
                 Toast.makeText(this, "Welcome to Kaching", Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception){

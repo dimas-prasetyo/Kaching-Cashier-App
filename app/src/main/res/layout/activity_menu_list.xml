@@ -169,21 +169,21 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_btn_done"
+            android:id="@+id/cv_btn_clear"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:backgroundTint="@color/primary_dark"
+            android:backgroundTint="@color/redFailed"
             android:elevation="10dp"
             app:cardCornerRadius="5dp">
 
             <ImageView
-                android:id="@+id/btn_done"
+                android:id="@+id/btn_clear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:src="@drawable/icon_done"
-                app:tint="@color/primary_light" />
+                android:src="@drawable/icon_delete"
+                app:tint="@color/white" />
 
         </com.google.android.material.card.MaterialCardView>
 

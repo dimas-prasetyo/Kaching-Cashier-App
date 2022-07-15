@@ -1,9 +1,16 @@
 package com.epzigsoftwarehouse.chachingapp
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epzigsoftwarehouse.chachingapp.cashier.Cashier
@@ -11,6 +18,7 @@ import com.epzigsoftwarehouse.chachingapp.database.DatabaseHandler
 import com.epzigsoftwarehouse.chachingapp.history.History
 import com.epzigsoftwarehouse.chachingapp.products.Product
 import com.epzigsoftwarehouse.chachingapp.products.ProductSelectedAdapter
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_payment_verification.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -27,6 +35,11 @@ class PaymentVerificationActivity : AppCompatActivity() {
     private lateinit var currentTimes: String
     private var activeCashier = 0
     private var totalPrice = 0.00
+    private var cashPayment = 0.00
+    private var storeTax = 0
+    private var totalTaxPayment = 0.00
+    private var tipPayment = 0.00
+    private lateinit var infoDialogBox: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +50,11 @@ class PaymentVerificationActivity : AppCompatActivity() {
         storeName = temp_setting.getString("store_name", "").toString()
         choosenCurrency = temp_setting.getString("currency", "").toString()
         activeCashier = temp_setting.getString("active_cashier", "").toString().toInt()
+        storeTax = temp_setting.getString("tax", "").toString().toInt()
 
         loadSelectedProducts()
         loadSavedSetting()
+        hidePaymentDetail()
         if (activeCashier > 0){
             loadActiveCashier()
         }
@@ -54,7 +69,7 @@ class PaymentVerificationActivity : AppCompatActivity() {
         txt_time.text = timesFormated + " - " + dateFormated
 
         btn_done.setOnClickListener {
-            addToHistory()
+            showPaymentDialogBox()
         }
 
         btn_back.setOnClickListener {
@@ -94,7 +109,7 @@ class PaymentVerificationActivity : AppCompatActivity() {
             totalPrice = Math.round(totalPrice * 100.0) / 100.0
         }
 
-        total_price.text = totalPrice.toString()
+        value_price.text = totalPrice.toString()
         rv_product_list.hasFixedSize()
         rv_product_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -105,11 +120,21 @@ class PaymentVerificationActivity : AppCompatActivity() {
     private fun loadSavedSetting() {
         txt_store_name.text = storeName
 
-        if (choosenCurrency.equals("dollar"))
+        if (choosenCurrency.equals("dollar")){
             txt_currency.text = "$"
+        }
 
-        if (choosenCurrency.equals("rupiah"))
+        if (choosenCurrency.equals("rupiah")){
             txt_currency.text = "Rp"
+        }
+
+        totalTaxPayment = totalPrice * storeTax / 100
+        totalTaxPayment = Math.round(totalTaxPayment * 100.0) / 100.0
+
+        txt_tax.text = "Tax (" + storeTax.toString() + "%)"
+        value_tax.text = totalTaxPayment.toString()
+
+
     }
 
     private fun loadActiveCashier() {
@@ -148,5 +173,121 @@ class PaymentVerificationActivity : AppCompatActivity() {
         return formatedTimes
     }
 
+    private fun hidePaymentDetail() {
+        /*txt_tax.visibility = View.GONE
+        txt_currency_tax.visibility = View.GONE
+        value_tax.visibility = View.GONE*/
+        txt_tip.visibility = View.GONE
+        txt_currency_tip.visibility = View.GONE
+        value_tip.visibility = View.GONE
+        line_final_total.visibility = View.GONE
+        txt_total_price.visibility = View.GONE
+        txt_currency_total_price.visibility = View.GONE
+        value_total_price.visibility = View.GONE
+        txt_cash.visibility = View.GONE
+        txt_currency_cash.visibility = View.GONE
+        value_cash.visibility = View.GONE
+        txt_change.visibility = View.GONE
+        txt_currency_change.visibility = View.GONE
+        value_change.visibility = View.GONE
+    }
+
+    private fun showPaymentDetail(){
+        /*txt_tax.visibility = View.VISIBLE
+        txt_currency_tax.visibility = View.VISIBLE
+        value_tax.visibility = View.VISIBLE*/
+        txt_tip.visibility = View.VISIBLE
+        txt_currency_tip.visibility = View.VISIBLE
+        value_tip.visibility = View.VISIBLE
+        line_final_total.visibility = View.VISIBLE
+        txt_total_price.visibility = View.VISIBLE
+        txt_currency_total_price.visibility = View.VISIBLE
+        value_total_price.visibility = View.VISIBLE
+        txt_cash.visibility = View.VISIBLE
+        txt_currency_cash.visibility = View.VISIBLE
+        value_cash.visibility = View.VISIBLE
+        txt_change.visibility = View.VISIBLE
+        txt_currency_change.visibility = View.VISIBLE
+        value_change.visibility = View.VISIBLE
+
+        if (choosenCurrency.equals("dollar")){
+            txt_currency_tax.text = "$"
+            txt_currency_tip.text = "$"
+            txt_currency_total_price.text = "$"
+            txt_currency_cash.text = "$"
+            txt_currency_change.text = "$"
+        } else if (choosenCurrency.equals("rupiah")){
+            txt_currency_tax.text = "Rp."
+            txt_currency_tip.text = "Rp."
+            txt_currency_total_price.text = "Rp."
+            txt_currency_cash.text = "$"
+            txt_currency_change.text = "$"
+        }
+
+        value_tip.text = tipPayment.toString()
+        value_cash.text = cashPayment.toString()
+        var tempTotalPayment = totalPrice + tipPayment + totalTaxPayment
+        value_total_price.text = tempTotalPayment.toString()
+        var tempChange = cashPayment - tempTotalPayment
+        tempChange = Math.round(tempChange * 100.0) / 100.0
+        value_change.text = tempChange.toString()
+
+        btn_done.visibility = View.GONE
+
+    }
+
+    private fun showPaymentDialogBox() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_input_payment, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setView(promptView)
+
+        val input_cash = promptView.findViewById<EditText>(R.id.input_cash) as EditText
+        val input_tip = promptView.findViewById<EditText>(R.id.input_tip) as EditText
+        val txt_amount_price = promptView.findViewById<TextView>(R.id.txt_amount_price) as TextView
+
+        val txt_currency = promptView.findViewById<TextView>(R.id.txt_currency) as TextView
+        val txt_currency_2 = promptView.findViewById<TextView>(R.id.txt_currency_2) as TextView
+        val txt_currency_3 = promptView.findViewById<TextView>(R.id.txt_currency_3) as TextView
+
+        val btn_done = promptView.findViewById<MaterialCardView>(R.id.btn_done) as MaterialCardView
+
+        if (choosenCurrency.equals("dollar")){
+            txt_currency.text = "$"
+            txt_currency_2.text = "$"
+            txt_currency_3.text = "$"
+        } else if (choosenCurrency.equals("rupiah")){
+            txt_currency.text = "Rp."
+            txt_currency_2.text = "Rp."
+            txt_currency_3.text = "Rp."
+        }
+
+        var tempPriceTax = totalPrice + totalTaxPayment
+        tempPriceTax = Math.round(tempPriceTax * 100.0) / 100.0
+        txt_amount_price.text = tempPriceTax.toString()
+        // create an alert dialog
+
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+
+        btn_done.setOnClickListener {
+            cashPayment = input_cash.getText().toString().toDouble()
+            tipPayment = input_tip.getText().toString().toDouble()
+            var tempTotalPrice = totalPrice + tipPayment + totalTaxPayment
+            if (cashPayment >= tempTotalPrice){
+                showPaymentDetail()
+                addToHistory()
+                infoDialogBox.dismiss()
+            }
+        }
+
+    }
 
 }

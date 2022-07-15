@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_total_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Total Price" />
+
+                <TextView
+                    android:id="@+id/txt_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_below="@id/txt_total_price"
+                    android:text="$"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_amount_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_alignRight="@id/txt_total_price"
+                    android:layout_below="@id/txt_total_price"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/txt_currency"
+                    android:text="12.0"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_below="@id/txt_amount_price"
+                    android:layout_marginTop="10dp"
+                    android:text="Cash"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_currency_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/input_cash"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_alignTop="@id/input_cash"
+                    android:gravity="center_vertical"
+                    android:text="$"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/input_cash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/txt_total_price"
+                    android:layout_below="@id/txt_cash"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/txt_currency_2"
+                    android:hint="0"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_below="@id/input_cash"
+                    android:layout_marginTop="10dp"
+                    android:text="Tip"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_currency_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/input_tip"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_alignTop="@id/input_tip"
+                    android:gravity="center_vertical"
+                    android:text="$"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/input_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/txt_total_price"
+                    android:layout_below="@id/txt_tip"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/txt_currency_2"
+                    android:text="0"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignRight="@id/txt_total_price"
+                    android:layout_alignLeft="@id/txt_total_price"
+                    android:layout_below="@id/input_tip"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/primary_dark"
+                    app:cardCornerRadius="5dp"
+                    android:elevation="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Done"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        android:textStyle="bold"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</RelativeLayout>

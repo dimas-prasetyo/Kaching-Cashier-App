@@ -16,6 +16,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +30,8 @@ class SettingActivity : AppCompatActivity() {
     private val GALLERY_WRITE_REQUEST_CODE: Int =  105
     private lateinit var storeName: String
     private lateinit var storeLogoPath: String
+    private lateinit var storeCurrency: String
+    private var storeTax = 0
     lateinit var temp_setting: SharedPreferences
     private lateinit var infoDialogBox: AlertDialog
 
@@ -53,13 +56,15 @@ class SettingActivity : AppCompatActivity() {
         }
 
         layout_currency.setOnClickListener {
-            temp_setting.edit().putString("currency", "dollar").apply()
-            loadDetailStore()
+            showCurrencyDialogBox()
         }
 
         layout_language.setOnClickListener {
-            temp_setting.edit().putString("currency", "rupiah").apply()
-            loadDetailStore()
+
+        }
+
+        layout_tax.setOnClickListener {
+            showChangeTaxDialogBox()
         }
 
         btn_change_name.setOnClickListener {
@@ -83,8 +88,11 @@ class SettingActivity : AppCompatActivity() {
             val tempLanguage = temp_setting.getString("language", "").toString()
             txt_language.text = tempLanguage
 
-            val tempCurrency = temp_setting.getString("currency", "").toString()
-            txt_currency.text = tempCurrency
+            storeCurrency = temp_setting.getString("currency", "").toString()
+            txt_currency.text = storeCurrency
+
+            storeTax = temp_setting.getString("tax", "").toString().toInt()
+            txt_tax.text = storeTax.toString() + " %"
         } catch (e: Exception){
 
         }
@@ -181,6 +189,98 @@ class SettingActivity : AppCompatActivity() {
 
         btn_cancel.setOnClickListener {
             infoDialogBox.dismiss()
+        }
+
+    }
+
+    private fun showChangeTaxDialogBox() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_input_tax, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setView(promptView)
+
+        val input_tax = promptView.findViewById<EditText>(R.id.input_tax) as EditText
+
+        val btn_save = promptView.findViewById<TextView>(R.id.btn_save) as TextView
+        val btn_cancel = promptView.findViewById<TextView>(R.id.btn_cancel) as TextView
+
+        input_tax.setText(storeTax.toString())
+        // create an alert dialog
+
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        btn_save.setOnClickListener {
+            try {
+                val tempInput = input_tax.getText().toString().toInt()
+                if (tempInput <= 100 && tempInput >= 0){
+                    temp_setting.edit().putString("tax", input_tax.getText().toString()).apply()
+                    infoDialogBox.dismiss()
+                    loadDetailStore()
+                }
+            } catch (e: Exception){}
+
+        }
+
+        btn_cancel.setOnClickListener {
+            infoDialogBox.dismiss()
+        }
+
+    }
+
+    private fun showCurrencyDialogBox() {
+        val layoutInflater = LayoutInflater.from(this)
+        val promptView: View = layoutInflater.inflate(R.layout.layout_change_currency, null)
+        val layoutShowInfo = AlertDialog.Builder(this)
+        layoutShowInfo.setView(promptView)
+
+        val icon_done_dollar = promptView.findViewById<ImageView>(R.id.icon_done_dollar) as ImageView
+        val icon_done_rupiah = promptView.findViewById<ImageView>(R.id.icon_done_rupiah) as ImageView
+
+        val txt_dollar = promptView.findViewById<TextView>(R.id.txt_dollar) as TextView
+        val txt_rupiah = promptView.findViewById<TextView>(R.id.txt_rupiah) as TextView
+
+        // create an alert dialog
+
+        if (storeCurrency.equals("dollar")){
+            icon_done_dollar.visibility = View.VISIBLE
+            icon_done_rupiah.visibility = View.INVISIBLE
+
+            txt_dollar.setTextColor(ContextCompat.getColor(this, R.color.primary_dark))
+            txt_rupiah.setTextColor(ContextCompat.getColor(this, R.color.colorGray))
+
+        } else if (storeCurrency.equals("rupiah")){
+            icon_done_dollar.visibility = View.INVISIBLE
+            icon_done_rupiah.visibility = View.VISIBLE
+
+            txt_dollar.setTextColor(ContextCompat.getColor(this, R.color.colorGray))
+            txt_rupiah.setTextColor(ContextCompat.getColor(this, R.color.primary_dark))
+        }
+        val layoutInput: AlertDialog = layoutShowInfo.create()
+        layoutInput.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //layoutInput.setView(promptView, 0, 0, 0, 0)
+
+        infoDialogBox = layoutShowInfo.create()
+        infoDialogBox.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        infoDialogBox.show()
+
+        txt_dollar.setOnClickListener {
+            temp_setting.edit().putString("currency", "dollar").apply()
+            infoDialogBox.dismiss()
+            loadDetailStore()
+        }
+
+        txt_rupiah.setOnClickListener {
+            temp_setting.edit().putString("currency", "rupiah").apply()
+            infoDialogBox.dismiss()
+            loadDetailStore()
         }
 
     }

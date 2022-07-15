@@ -53,7 +53,7 @@ class MenuListActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-        layout_btn_selected.setOnClickListener {
+        btn_selected.setOnClickListener {
             val intent = Intent(this, PaymentVerificationActivity::class.java)
             intent.putParcelableArrayListExtra("selectedProducts", selectedProducts)
             startActivity(intent)
@@ -61,6 +61,13 @@ class MenuListActivity : AppCompatActivity(){
 
         btn_back.setOnClickListener {
             onBackPressed()
+        }
+
+        cv_btn_clear.setOnClickListener {
+            val tempList = arrayListOf<Product>()
+            selectedProducts = tempList
+            loadProductList()
+            layout_btn_selected.visibility = View.GONE
         }
     }
 
@@ -210,7 +217,8 @@ class MenuListActivity : AppCompatActivity(){
     override fun onResume() {
         //refreshAll()
         super.onResume()
-        loadCategory()
-        loadProductBy(categoryActive, "")
+        if (productListSize > 0) {
+            loadProductBy(categoryActive, "")
+        }
     }
 }

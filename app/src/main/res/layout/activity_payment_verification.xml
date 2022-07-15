@@ -148,14 +148,14 @@
                 android:id="@+id/line_total"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_alignRight="@id/txt_store_name"
                 android:layout_alignLeft="@id/txt_store_name"
-                android:background="@color/black"
+                android:layout_alignRight="@id/txt_store_name"
                 android:layout_below="@id/rv_product_list"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/black" />
 
             <TextView
-                android:id="@+id/total_price"
+                android:id="@+id/value_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/txt_store_name"
@@ -164,32 +164,228 @@
                 android:maxWidth="200dp"
                 android:text="500.000"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/total_price"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@id/total_price"
+                android:layout_alignTop="@id/value_price"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_price"
                 android:text="$"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_sub_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_price"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency"
+                android:text="Subtotal"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/value_price"
+                android:layout_marginTop="10dp"
+                android:maxWidth="200dp"
+                android:text="500.000"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_currency_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_tax"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_tax"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_tax"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency_tax"
+                android:text="Tax"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/value_tax"
+                android:layout_marginTop="10dp"
+                android:maxWidth="200dp"
+                android:text="500.000"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_currency_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_tip"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_tip"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_tip"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency"
+                android:text="Tip"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/line_final_total"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignLeft="@id/txt_sub_total_price"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/value_tip"
+                android:layout_marginTop="10dp"
+                android:background="@color/black" />
 
             <TextView
                 android:id="@+id/txt_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_total_price"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency_total_price"
                 android:text="Total"
-                android:layout_alignTop="@id/total_price"
-                android:layout_toLeftOf="@id/txt_currency"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginRight="100dp"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_currency_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_total_price"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_total_price"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/line_final_total"
+                android:layout_marginTop="10dp"
+                android:maxWidth="200dp"
+                android:text="500.000"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_cash"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency_cash"
+                android:text="Cash"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_currency_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_cash"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_cash"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/value_total_price"
+                android:layout_marginTop="10dp"
+                android:maxWidth="200dp"
+                android:text="500.000"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/txt_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_change"
+                android:layout_marginRight="100dp"
+                android:layout_toLeftOf="@id/txt_currency_change"
+                android:text="Change"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_currency_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/value_change"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/value_change"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/txt_store_name"
+                android:layout_below="@id/value_cash"
+                android:layout_marginTop="10dp"
+                android:maxWidth="200dp"
+                android:text="500.000"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </ScrollView>

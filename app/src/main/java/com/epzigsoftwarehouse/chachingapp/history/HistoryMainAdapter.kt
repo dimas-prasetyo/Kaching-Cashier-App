@@ -48,6 +48,7 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                 for (i in 0..items.size-1) {
                     if (item.transaction_id.equals(items[i].transaction_id)) {
                         totalPrice = totalPrice + items[i].price * items[i].amount
+                        totalPrice= Math.round(totalPrice * 100.0) / 100.0
                         totalProduct = totalProduct + 1
                     }
                 }
@@ -56,6 +57,51 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
                 holder.txt_time.text = item.time
                 holder.txt_total_price.text = totalPrice.toString()
             }
+
+            /*println("ukuran: " + items.size)
+            println("item: " + items)*/
+            if (item.date.equals(items[position - 1].date)){
+                var tempList: ArrayList<String> = ArrayList()
+                for (i in 0..position-1){
+                    if (item.date.equals(items[i].date)){
+                        tempList.add(items[i].transaction_id)
+                    }
+                }
+                var categoryList = tempList.distinct()
+                var textNumber = categoryList.size + 1
+                holder.txt_number.text = textNumber.toString()
+                /*if (item.time.equals(items[position - 1].time)){
+
+                } else {
+                    var tempList: ArrayList<String> = ArrayList()
+                    for (i in 0..position-1){
+                        if (item.date.equals(items[i].date)){
+                            tempList.add(items[i].transaction_id)
+                        }
+                    }
+                    var categoryList = tempList.distinct()
+                    var textNumber = categoryList.size + 1
+                    holder.txt_number.text = textNumber.toString()
+                }*/
+            } else {
+                holder.txt_number.text = "1"
+            }
+            /*var textNumber = 2
+            for (i in 0..position-1) {
+                println("item ini: " + item.time + ", produk: " + item.product_name)
+                println("item sebelumnya: " + items[position - 1].time + ", produk: " + items[position - 1].product_name)
+                if (item.date.equals(items[position - 1].date)){
+                    if (item.time.equals(items[position - 1].time)){
+
+                    } else {
+                        holder.txt_number.text = textNumber.toString()
+                        println("urutan: " + textNumber)
+                        textNumber = textNumber + 1
+                    }
+                } else {
+                    holder.txt_number.text = "1"
+                }
+            }*/
         } else {
             holder.txt_transaction_date.text = dateFormated
 
@@ -64,6 +110,7 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
             for (i in 0..items.size-1){
                 if (item.transaction_id.equals(items[i].transaction_id)){
                     totalPrice = totalPrice + items[i].price * items[i].amount
+                    totalPrice= Math.round(totalPrice * 100.0) / 100.0
                     totalProduct = totalProduct + 1
                 }
             }
@@ -71,51 +118,8 @@ class HistoryMainAdapter (val context: Context?, val items: List<History>) : Rec
             //holder.txt_time.text = timesFormated
             holder.txt_total_price.text = totalPrice.toString()
             holder.txt_time.text = item.time
-            /*if (item.transaction_id.equals(items[position + 1].transaction_id)){
-                println("Ya ada duplicate")
-                holder.cv_history.visibility = View.GONE
-            } else {
-                println("tidak ada duplicate")
-                var totalPrice = 0.00
-                var totalProduct = 0
-                for (i in 0..items.size-1){
-                    if (item.transaction_id.equals(items[i].transaction_id)){
-                        totalPrice = totalPrice + items[i].price
-                        totalProduct = totalProduct + 1
-                    }
-                }
-                holder.txt_product.text = totalProduct.toString() + " product"
-                holder.txt_time.text = timesFormated
-                holder.txt_total_price.text = totalPrice.toString()
-            }*/
+            holder.txt_number.text = "1"
         }
-
-
-
-
-        /*if (position < items.size-1){
-            if (item.date.equals(items[position + 1].date)){
-                holder.txt_transaction_date.visibility = View.GONE
-            } else {
-                holder.txt_transaction_date.text = dateFormated
-            }
-
-            if (item.transaction_id.equals(items[position + 1].transaction_id)){
-                holder.cv_history.visibility = View.GONE
-            } else {
-                *//*var totalPrice = 0.00
-                var totalProduct = 0
-                for (i in 0..items.size-1){
-                    if (item.transaction_id.equals(items[i].transaction_id)){
-                        totalPrice = totalPrice + items[i].price
-                        totalProduct = totalProduct + 1
-                    }
-                }*//*
-                holder.txt_product.text = item.transaction_id
-                holder.txt_time.text = timesFormated
-                holder.txt_total_price.text = item.price.toString()
-            }
-        }*/
     }
 
     override fun getItemCount(): Int {
