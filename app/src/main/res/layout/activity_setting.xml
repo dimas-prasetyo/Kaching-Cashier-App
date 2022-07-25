@@ -26,6 +26,18 @@
         android:src="@drawable/icon_back"
         android:translationZ="90dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/btn_back"
+        android:layout_alignTop="@id/btn_back"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Setting"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

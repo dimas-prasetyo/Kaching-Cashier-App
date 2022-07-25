@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.epzigsoftwarehouse.chachingapp">
+    package="com.epzigsoftwarehouse.kaching">
 
     <application
         android:allowBackup="true"
@@ -12,49 +12,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaChingApp">
         <activity
-            android:name=".HistoryDetailActivity"
+            android:name="com.epzigsoftwarehouse.kaching.HistoryDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ImagePreviewActivity"
+            android:name="com.epzigsoftwarehouse.kaching.ImagePreviewActivity"
             android:exported="false" />
         <activity
-            android:name=".CashierDetailActivity"
+            android:name="com.epzigsoftwarehouse.kaching.CashierDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".HistoryActivity"
+            android:name="com.epzigsoftwarehouse.kaching.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentVerificationActivity"
+            android:name="com.epzigsoftwarehouse.kaching.PaymentVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".CashierListActivity"
+            android:name="com.epzigsoftwarehouse.kaching.CashierListActivity"
             android:exported="false" />
         <activity
-            android:name=".AddingCashierActivity"
+            android:name="com.epzigsoftwarehouse.kaching.AddingCashierActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".SettingActivity"
+            android:name="com.epzigsoftwarehouse.kaching.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutActivity"
+            android:name="com.epzigsoftwarehouse.kaching.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuEditableActivity"
+            android:name="com.epzigsoftwarehouse.kaching.MenuEditableActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".BarcodeScannerActivity"
+            android:name="com.epzigsoftwarehouse.kaching.BarcodeScannerActivity"
             android:exported="false" />
         <activity
-            android:name=".AddingMenuActivity"
+            android:name="com.epzigsoftwarehouse.kaching.AddingMenuActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".MenuListActivity"
+            android:name="com.epzigsoftwarehouse.kaching.MenuListActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name="com.epzigsoftwarehouse.kaching.HomeActivity" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.epzigsoftwarehouse.kaching.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

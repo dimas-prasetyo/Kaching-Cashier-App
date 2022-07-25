@@ -26,6 +26,18 @@
         android:src="@drawable/icon_back"
         android:translationZ="90dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/btn_back"
+        android:layout_alignBottom="@id/btn_back"
+        android:text="History"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
     <RelativeLayout
         android:id="@+id/layout_title_list"
         android:layout_width="match_parent"
